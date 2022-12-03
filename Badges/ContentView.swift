@@ -14,6 +14,9 @@ struct ContentView: View {
     @State var rubyClicked = false
     
     var body: some View {
+        
+        //BadgeReturnTemp()
+        
         ZStack(alignment: .top){
             Color.black
                 .ignoresSafeArea()
@@ -198,6 +201,8 @@ struct ContentView: View {
         }.overlay(triangleClicked ? Overlay(triangleClicked: $triangleClicked) : nil)
             .overlay(goldClicked ? Overlay2(goldClicked: $goldClicked) : nil)
             .overlay(rubyClicked ? Overlay3(rubyClicked: $rubyClicked) : nil)
+         
+        
     }
 }
 
