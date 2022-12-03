@@ -30,7 +30,8 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .padding(.bottom,62)
             
-            Polygon(sides : 3)
+            
+            /*Polygon(sides : 3)
                 .rotation(Angle(degrees: 30))
                 .fill(
                     LinearGradient(
@@ -41,7 +42,9 @@ struct ContentView: View {
                         startPoint: .top,
                         endPoint: .bottom))
                 .frame(width: 150)
-                .padding(.bottom,24)
+                .padding(.bottom,24)*/
+            
+            Image("StarBadge")
             
             Text("Silver")
                 .bold()
