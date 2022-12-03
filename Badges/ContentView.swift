@@ -18,8 +18,11 @@ struct ContentView: View {
         //BadgeReturnTemp()
          
         ZStack(alignment: .top){
-            Color.black
+            Color(hue: 0, saturation: 0, brightness: 0.07)
                 .ignoresSafeArea()
+            
+            Image("TriangleBackground")
+                        .edgesIgnoringSafeArea(.all)
             
         VStack(){
             Text("Sleep 7-9 hours")
@@ -44,7 +47,7 @@ struct ContentView: View {
                 .frame(width: 150)
                 .padding(.bottom,24)*/
             
-            Image("StarBadge")
+            Image("Triangle")
             
             Text("Silver")
                 .bold()
