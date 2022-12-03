@@ -12,6 +12,7 @@ struct ContentView: View {
     @State var triangleClicked = false
     @State var goldClicked = false
     @State var rubyClicked = false
+    @EnvironmentObject var badge : BadgeViewModel
     
     var body: some View {
         
@@ -23,7 +24,7 @@ struct ContentView: View {
             
             Image("TriangleBackground")
                         .edgesIgnoringSafeArea(.all)
-            
+       
         VStack(){
             Text("Sleep 7-9 hours")
                 .foregroundColor(.white)
@@ -32,20 +33,7 @@ struct ContentView: View {
             Text("Badges")
                 .foregroundColor(.white)
                 .padding(.bottom,62)
-            
-            
-            /*Polygon(sides : 3)
-                .rotation(Angle(degrees: 30))
-                .fill(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            Gradient.Stop(color: .gray, location: 0.2),
-                            Gradient.Stop(color: .white, location: 0.2)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom))
-                .frame(width: 150)
-                .padding(.bottom,24)*/
+    
             
             Image("Triangle")
             
@@ -66,141 +54,43 @@ struct ContentView: View {
             }
             .padding(.bottom,47)
             
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 342,height: 100)
-                    .foregroundColor(Color(.darkGray))
-                HStack(){
-                    Button(action: {
-                        triangleClicked.toggle()
-                    }){
-                        Polygon(sides : 3)
-                            .rotation(Angle(degrees: 30))
-                            .fill(Color(.yellow))
-                            .frame(width: 70,height: 70,alignment: .leading)
-                            .padding(.top)
-                    }
-                    VStack{
-                        Text("Silver")
-                            .foregroundColor(.white)
-                        Text("0-3rd repetition")
-                            .foregroundColor(.white)
-                            .opacity(0.4)
-                    }
-                    .padding(.leading,10)
-                    HStack{
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(Color(.systemPink))
-                        Text("4")
-                            .foregroundColor(.white)
-                        
+            ForEach(0..<badges.count){ i in
+                ZStack{
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(width: 342,height: 100)
+                        .foregroundColor(Color(.darkGray))
+                    HStack(){
+                        Button(action: {
+                            triangleClicked.toggle()
+                        }){
+                            Image("\(badges[i].shape)")
+                                .resizable()
+                                .frame(width: 70,height: 70,alignment: .leading)
+                                
+                        }
+                        VStack{
+                            Text("\(badges[i].shape)")
+                                .foregroundColor(.white)
+                            Text("\(badges[i].beginRepetition) - \(badges[i].endRepetition) repetition")
+                                .foregroundColor(.white)
+                                .opacity(0.4)
+                        }
+                        .padding(.leading,10)
+                        HStack{
+                            Image(systemName: "heart.fill")
+                                .foregroundColor(Color(.systemPink))
+                            Text("\(badges[i].lives)")
+                                .foregroundColor(.white)
                             
-                    }
-                    .padding(.leading,50)
-                    .padding(.bottom,40)
-                    
-                }
-                .frame(width: 342,height: 100)
-            }
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 342,height: 100)
-                    .foregroundColor(Color(.darkGray))
-                HStack(){
-                    Button(action: {
-                        goldClicked.toggle()
-                    }){
-                        Polygon(sides : 4)
-                            .fill(Color(.orange))
-                            .frame(width: 70,height: 70,alignment: .leading)
-                            .padding(.top)
-                            .padding(.bottom)
-                    }
-                    VStack{
-                        Text("Gold")
-                            .foregroundColor(.white)
-                        Text("4th - 10th repetition")
-                            .foregroundColor(.white)
-                            .opacity(0.4)
-                    }.padding(.leading,10)
-                    HStack{
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(Color(.systemPink))
-                        Text("4")
-                            .foregroundColor(.white)
+                                
+                        }
+                        .padding(.leading,50)
+                        .padding(.bottom,40)
                         
-                            
                     }
-                    .padding(.leading,30)
-                    .padding(.bottom,40)
-                    
-                }
-                .frame(width: 342,height: 100)
-            }
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
                     .frame(width: 342,height: 100)
-                    .foregroundColor(Color(.darkGray))
-                HStack(){
-                    Button(action: {
-                       rubyClicked.toggle()
-                    }){
-                        Polygon(sides : 5)
-                            .rotation(Angle(degrees: 55))
-                            .fill(Color(.green))
-                            .frame(width: 70,height: 70,alignment: .leading)
-                            .padding(.top)
-                    }
-                    VStack{
-                        Text("Ruby")
-                            .foregroundColor(.white)
-                        Text("11th - 21st repetition")
-                            .foregroundColor(.white)
-                            .opacity(0.4)
-                    }.padding(.leading,10)
-                    HStack{
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(Color(.systemPink))
-                        Text("4")
-                            .foregroundColor(.white)
-                        
-                            
-                    }
-                    .padding(.leading,30)
-                    .padding(.bottom,40)
-                    
                 }
-            }
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 342,height: 100)
-                    .foregroundColor(Color(.darkGray))
-                HStack(){
-                    
-                    Polygon(sides : 6)
-                        .rotation(Angle(degrees: 30))
-                        .fill(Color(.systemBlue))
-                        .frame(width: 70,height: 70,alignment: .leading)
-                        .padding(.top)
-                    VStack{
-                        Text("Diamond")
-                            .foregroundColor(.white)
-                        Text("22 - 45th repetition")
-                            .foregroundColor(.white)
-                            .opacity(0.4)
-                    }.padding(.leading,10)
-                    HStack{
-                        Image(systemName: "heart.fill")
-                            .foregroundColor(Color(.systemPink))
-                        Text("4")
-                            .foregroundColor(.white)
-                        
-                            
-                    }
-                    .padding(.leading,30)
-                    .padding(.bottom,40)
-                    
-                }
+                
             }
         }
         .frame(alignment: .top)
