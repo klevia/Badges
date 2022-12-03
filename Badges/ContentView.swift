@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         
         //BadgeReturnTemp()
-        
+         
         ZStack(alignment: .top){
             Color.black
                 .ignoresSafeArea()
