@@ -11,6 +11,8 @@
 		814155402938FDD4001792F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553F2938FDD4001792F6 /* ContentView.swift */; };
 		814155422938FDD5001792F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155412938FDD5001792F6 /* Assets.xcassets */; };
 		814155452938FDD5001792F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155442938FDD5001792F6 /* Preview Assets.xcassets */; };
+		8141554C2938FF03001792F6 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141554B2938FF03001792F6 /* Star.swift */; };
+		8141554E2938FF2F001792F6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141554D2938FF2E001792F6 /* Polygon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		8141553F2938FDD4001792F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		814155412938FDD5001792F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		814155442938FDD5001792F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8141554B2938FF03001792F6 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		8141554D2938FF2E001792F6 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			children = (
 				8141553D2938FDD4001792F6 /* BadgesApp.swift */,
 				8141553F2938FDD4001792F6 /* ContentView.swift */,
+				8141554B2938FF03001792F6 /* Star.swift */,
+				8141554D2938FF2E001792F6 /* Polygon.swift */,
 				814155412938FDD5001792F6 /* Assets.xcassets */,
 				814155432938FDD5001792F6 /* Preview Content */,
 			);
@@ -137,6 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8141554E2938FF2F001792F6 /* Polygon.swift in Sources */,
+				8141554C2938FF03001792F6 /* Star.swift in Sources */,
 				814155402938FDD4001792F6 /* ContentView.swift in Sources */,
 				8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */,
 			);
