@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4924EDA1293BBBAF00A42185 /* BadgeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924EDA0293BBBAF00A42185 /* BadgeModel.swift */; };
 		8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553D2938FDD4001792F6 /* BadgesApp.swift */; };
 		814155402938FDD4001792F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553F2938FDD4001792F6 /* ContentView.swift */; };
 		814155422938FDD5001792F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155412938FDD5001792F6 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4924EDA0293BBBAF00A42185 /* BadgeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeModel.swift; sourceTree = "<group>"; };
 		8141553A2938FDD4001792F6 /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8141553D2938FDD4001792F6 /* BadgesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesApp.swift; sourceTree = "<group>"; };
 		8141553F2938FDD4001792F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -39,6 +41,7 @@
 		814155312938FDD4001792F6 = {
 			isa = PBXGroup;
 			children = (
+				4924EDA0293BBBAF00A42185 /* BadgeModel.swift */,
 				8141553C2938FDD4001792F6 /* Badges */,
 				8141553B2938FDD4001792F6 /* Products */,
 			);
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4924EDA1293BBBAF00A42185 /* BadgeModel.swift in Sources */,
 				8141554E2938FF2F001792F6 /* Polygon.swift in Sources */,
 				8141554C2938FF03001792F6 /* Star.swift in Sources */,
 				814155402938FDD4001792F6 /* ContentView.swift in Sources */,
