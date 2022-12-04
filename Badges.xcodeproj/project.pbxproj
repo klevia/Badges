@@ -102,7 +102,6 @@
 		814155432938FDD5001792F6 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				497BD674293CE7900041E3DA /* Color+Extension.swift */,
 				814155442938FDD5001792F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -186,7 +185,6 @@
 				497BD672293C83650041E3DA /* ProgressLostPopup.swift in Sources */,
 				8141554C2938FF03001792F6 /* Star.swift in Sources */,
 				497BD66C293C7D270041E3DA /* BadgeTray.swift in Sources */,
-				497BD675293CE7900041E3DA /* Color+Extension.swift in Sources */,
 				814155402938FDD4001792F6 /* ContentView.swift in Sources */,
 				497BD670293C83120041E3DA /* BadgeEarnedPopup.swift in Sources */,
 				8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */,
