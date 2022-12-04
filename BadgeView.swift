@@ -18,8 +18,9 @@ struct BadgeView: View {
             Color.black.ignoresSafeArea()
             
             Button(action:{
-               print(badge.currentBadgeStatus(defaultBadges: badges))
+              // print(badge.currentBadgeStatus(defaultBadges: badges))
                 //print(badge.currentBadgeStatus(defaultBadges: badges).count)
+                print(badge.currentBadgeStatus(defaultBadges: badges))
 
                 withAnimation(){
                     sheetPresented = true

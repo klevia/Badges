@@ -131,8 +131,9 @@ struct BadgeTrayList: View{
     var body: some View{
         
         VStack(spacing: 16){
+
             
-        ForEach(0..<badge.currentBadgeStatus(defaultBadges: badges).count){ i in
+            ForEach(0..<badge.currentBadgeStatus(defaultBadges: badges).count){ i in
             
             
             HStack(spacing: 0){
@@ -171,7 +172,6 @@ struct BadgeTrayList: View{
                     .opacity(0.4)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
                 HStack(spacing: 4){
                     
                     Image("Heart")
@@ -183,9 +183,9 @@ struct BadgeTrayList: View{
                         .background(
                         
                             LinearGradient(gradient: Gradient(stops: [
-                                    Gradient.Stop(color: Color(hex: "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.endColor})[i])"), location: 0),
-                                    Gradient.Stop(color: Color(hex: "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor})[i])"), location: 0.5),
-                                    Gradient.Stop(color: Color(hex: "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.endColor})[i])"), location: 1)
+                                Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 0),
+                                    Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 0.5),
+                                    Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 1)
                                 ]), startPoint: .leading, endPoint: .trailing)
                             .mask(
                                 
@@ -207,6 +207,7 @@ struct BadgeTrayList: View{
                 .padding(.trailing, 16)
                 
                 .frame(maxHeight: .infinity, alignment: .top)
+
                 
                 
             }
