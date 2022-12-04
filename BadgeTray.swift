@@ -18,7 +18,7 @@ struct BadgeTray: View {
         
         ZStack{
             
-            Color(hue: 0, saturation: 0, brightness: 0.07)
+            Color(hue: 0, saturation: 0, brightness: 0.07) // Replace this with Color(hex: "121212)
                 .ignoresSafeArea()
             
             ScrollView(showsIndicators: false){
@@ -130,69 +130,74 @@ struct BadgeTrayList: View{
     
     var body: some View{
         
+        VStack(spacing: 16){
+            
         ForEach(0..<badge.currentBadgeStatus(defaultBadges: badges).count){ i in
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 342,height: 100)
-                    .foregroundColor(Color(hue: 0.136111, saturation: 0.1, brightness: 0.99).opacity(0.1))
+            
+            
+            HStack(spacing: 0){
+                Button(action: {
+                    //triangleClicked.toggle()
+                }){
+                    Image("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .opacity(0.25)
+                        .frame(width: 64, height: 64, alignment: .leading)
                     
-                HStack(){
-                    Button(action: {
-                        //triangleClicked.toggle()
-                    }){
-                        Image("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .opacity(0.25)
-                            .frame(width: 70,height: 70,alignment: .leading)
-                       
-                            .overlay(
-                                
-                                Image("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .mask(
-                                        Color.white.opacity(1)
-                                            .frame(height: CGFloat((Double(badge.currentBadgeStatus(defaultBadges: badges).map({$0.statusCount})[i])/Double(badge.currentBadgeStatus(defaultBadges: badges).map({$0.toAchieveRepetition})[i])))*70.0)
-                                            .frame(maxHeight: .infinity, alignment: .bottom)
-                                     
-                                    )
-                            )
-                    }
-                    VStack{
-                        Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
-                            .foregroundColor(.white)
-                        Text((badge.currentBadgeStatus(defaultBadges: badges).map({$0.badgeAchieved})[i]) == true ?
-                             " \(badge.currentBadgeStatus(defaultBadges: badges).map({$0.badgeAchievedDate.formatted()})[i])" :
+                        .overlay(
+                            
+                            Image("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .mask(
+                                    Color.white.opacity(1)
+                                        .frame(height: CGFloat((Double(badge.currentBadgeStatus(defaultBadges: badges).map({$0.statusCount})[i])/Double(badge.currentBadgeStatus(defaultBadges: badges).map({$0.toAchieveRepetition})[i])))*70.0)
+                                        .frame(maxHeight: .infinity, alignment: .bottom)
+                                    
+                                )
+                        )
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 16)
+                }
+                
+                VStack(alignment: .leading){
+                    Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
+                        .foregroundColor(.white)
+                    Text((badge.currentBadgeStatus(defaultBadges: badges).map({$0.badgeAchieved})[i]) == true ?
+                         " \(badge.currentBadgeStatus(defaultBadges: badges).map({$0.badgeAchievedDate.formatted()})[i])" :
                             "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.beginRepetition})[i]) - \(badge.currentBadgeStatus(defaultBadges: badges).map({$0.endRepetition})[i]) repetition")
-                            .foregroundColor(.white)
-                            .opacity(0.4)
-                    }
-                    .frame(width: 200, height: 39, alignment: .leading)
-                    .padding(.leading,10)
-                    HStack{
-                        Image(systemName: "heart.fill")
-                            .resizable()
-                            .foregroundColor(Color(.systemPink))
-                            .frame(width: 13, height: 12, alignment: .leading)
-                            
-                        Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.lives})[i])")
-                            .frame(width: 12, height: 12, alignment: .leading)
-                            .foregroundColor(.white)
-                        
-                            
-                    }
-                    .frame(width: 26, height: 16, alignment: .leading)
-                    .padding(.trailing,6)
-                    .padding(.bottom,40)
+                    .foregroundColor(.white)
+                    .opacity(0.4)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                HStack(spacing: 4){
+                    
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .foregroundColor(Color(.systemPink))
+                        .frame(width: 12, height: 12)
+                    
+                    Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.lives})[i])")
+                        .frame(width: 12, height: 12)
+                        .foregroundColor(.white)
+                    
                     
                 }
-                .frame(width: 342,height: 100)
-             
+                .padding(.trailing, 16)
+                
+                .frame(maxHeight: .infinity, alignment: .top)
+                
+                
             }
-            .frame(width: 342,height: 100,alignment: .center)
+            .padding(.vertical, 16)
+            .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
+            .padding(.horizontal, 24)
             
         }
+        
+    }
     }
 }
 struct BadgeTray_Previews: PreviewProvider {
