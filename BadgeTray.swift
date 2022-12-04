@@ -175,9 +175,28 @@ struct BadgeTrayList: View{
                 HStack(spacing: 4){
                     
                     Image("Heart")
-                        .renderingMode(.template)
-                        .foregroundColor(Color(.systemPink))
+                        .resizable()
+                        .aspectRatio( contentMode: .fit)
                         .frame(width: 12, height: 12)
+                        .opacity(0)
+                        
+                        .background(
+                        
+                            LinearGradient(gradient: Gradient(stops: [
+                                    Gradient.Stop(color: Color(hex: "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.endColor})[i])"), location: 0),
+                                    Gradient.Stop(color: Color(hex: "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor})[i])"), location: 0.5),
+                                    Gradient.Stop(color: Color(hex: "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.endColor})[i])"), location: 1)
+                                ]), startPoint: .leading, endPoint: .trailing)
+                            .mask(
+                                
+                                Image("Heart")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                
+                            )
+                        
+                        
+                        )
                     
                     Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.lives})[i])")
                         .frame(width: 12, height: 12)

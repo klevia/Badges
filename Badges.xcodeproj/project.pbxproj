@@ -15,13 +15,13 @@
 		497BD670293C83120041E3DA /* BadgeEarnedPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD66F293C83120041E3DA /* BadgeEarnedPopup.swift */; };
 		497BD672293C83650041E3DA /* ProgressLostPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD671293C83650041E3DA /* ProgressLostPopup.swift */; };
 		497BD679293CEE080041E3DA /* HeartGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD678293CEE080041E3DA /* HeartGradient.swift */; };
-		497BD67B293CF1E60041E3DA /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD67A293CF1E60041E3DA /* Color+Extension.swift */; };
 		8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553D2938FDD4001792F6 /* BadgesApp.swift */; };
 		814155402938FDD4001792F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553F2938FDD4001792F6 /* ContentView.swift */; };
 		814155422938FDD5001792F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155412938FDD5001792F6 /* Assets.xcassets */; };
 		814155452938FDD5001792F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155442938FDD5001792F6 /* Preview Assets.xcassets */; };
 		8141554C2938FF03001792F6 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141554B2938FF03001792F6 /* Star.swift */; };
 		8141554E2938FF2F001792F6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141554D2938FF2E001792F6 /* Polygon.swift */; };
+		8188A8AC293CF4350064B53A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188A8AB293CF4350064B53A /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,6 @@
 		497BD66F293C83120041E3DA /* BadgeEarnedPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeEarnedPopup.swift; sourceTree = "<group>"; };
 		497BD671293C83650041E3DA /* ProgressLostPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLostPopup.swift; sourceTree = "<group>"; };
 		497BD678293CEE080041E3DA /* HeartGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartGradient.swift; sourceTree = "<group>"; };
-		497BD67A293CF1E60041E3DA /* Color+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Color+Extension.swift"; path = "../../../CategoryApp-71/CategoryApp/Extension/Color+Extension.swift"; sourceTree = "<group>"; };
 		8141553A2938FDD4001792F6 /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8141553D2938FDD4001792F6 /* BadgesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesApp.swift; sourceTree = "<group>"; };
 		8141553F2938FDD4001792F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +40,7 @@
 		814155442938FDD5001792F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8141554B2938FF03001792F6 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		8141554D2938FF2E001792F6 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
+		8188A8AB293CF4350064B53A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Color+Extension.swift"; path = "../../Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				814155442938FDD5001792F6 /* Preview Assets.xcassets */,
-				497BD67A293CF1E60041E3DA /* Color+Extension.swift */,
+				8188A8AB293CF4350064B53A /* Color+Extension.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 				497BD670293C83120041E3DA /* BadgeEarnedPopup.swift in Sources */,
 				8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */,
 				497BD66E293C82940041E3DA /* BadgeIntroPopup.swift in Sources */,
-				497BD67B293CF1E60041E3DA /* Color+Extension.swift in Sources */,
+				8188A8AC293CF4350064B53A /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
