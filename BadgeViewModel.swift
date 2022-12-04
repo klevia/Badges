@@ -18,7 +18,7 @@ class BadgeViewModel: ObservableObject{
         
         for status in statuses{
             
-            var lockedBadgeIndex = currentBadgesStatus.filter({$0.badgeAchieved == false})[0].index
+            let lockedBadgeIndex = currentBadgesStatus.filter({$0.badgeAchieved == false})[0].index
             
             if status == 1{
                 
@@ -29,25 +29,21 @@ class BadgeViewModel: ObservableObject{
                 }
                 
             } else if (status == -2){
-                print("Status = -2")
-                print(currentBadgesStatus[lockedBadgeIndex].livesLeft)
+                
                 if currentBadgesStatus[lockedBadgeIndex].livesLeft == 0{
                     
                     currentBadgesStatus[lockedBadgeIndex].statusCount = 0
                     currentBadgesStatus[lockedBadgeIndex].livesLeft = currentBadgesStatus[lockedBadgeIndex].lives
-                    print("firstOne")
-                    
+                   
                 }else{
                     
                     currentBadgesStatus[lockedBadgeIndex].livesLeft -= 1
-                    print("secondOne")
                     
                 }
                 
             }
             
         }
-        print(currentBadgesStatus)
         
         return currentBadgesStatus
     }

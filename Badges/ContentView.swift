@@ -15,9 +15,9 @@ struct ContentView: View {
     
     var body: some View {
         
-        //BadgeReturnTemp()
+        BadgeReturnTemp()
          
-        ZStack(alignment: .top){
+        /*ZStack(alignment: .top){
             Color(hue: 0, saturation: 0, brightness: 0.07)
                 .ignoresSafeArea()
             
@@ -33,19 +33,6 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .padding(.bottom,62)
             
-            
-            /*Polygon(sides : 3)
-                .rotation(Angle(degrees: 30))
-                .fill(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            Gradient.Stop(color: .gray, location: 0.2),
-                            Gradient.Stop(color: .white, location: 0.2)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom))
-                .frame(width: 150)
-                .padding(.bottom,24)*/
             
             Image("Triangle")
             
@@ -206,7 +193,7 @@ struct ContentView: View {
         .frame(alignment: .top)
         }.overlay(triangleClicked ? Overlay(triangleClicked: $triangleClicked) : nil)
             .overlay(goldClicked ? Overlay2(goldClicked: $goldClicked) : nil)
-            .overlay(rubyClicked ? Overlay3(rubyClicked: $rubyClicked) : nil)
+            .overlay(rubyClicked ? Overlay3(rubyClicked: $rubyClicked) : nil)*/
          
         
     }
