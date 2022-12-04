@@ -62,14 +62,17 @@ struct TrayHeading: View{
     
     var body: some View{
         
-        Group{
+        VStack(spacing: 2){
+            
             Text("Sleep 7-9 hours")
-                .opacity(0.4)
-                .padding(.top,16)
-             
+                .font(.custom("Montserrat-Regular", size: 12))
+                .opacity(0.5)
+                
             Text("Badges")
-                .padding(.bottom,60)
-        }.foregroundColor(.black)
+                .font(.custom("Montserrat-Medium", size: 16))
+                .opacity(0.75)
+        }
+        .foregroundColor(.black)
            
     }
 }
