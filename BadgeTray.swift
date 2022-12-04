@@ -174,8 +174,8 @@ struct BadgeTrayList: View{
                 
                 HStack(spacing: 4){
                     
-                    Image(systemName: "heart.fill")
-                        .resizable()
+                    Image("Heart")
+                        .renderingMode(.template)
                         .foregroundColor(Color(.systemPink))
                         .frame(width: 12, height: 12)
                     
