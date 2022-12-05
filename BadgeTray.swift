@@ -115,9 +115,11 @@ struct CurrentBadgeSubHeading: View{
             
             Group{
                 
-                Image(systemName: "heart.fill")
-                    .padding(.leading, 2)
-                    .padding(.trailing, 1)
+                Image("Heart")
+                    .resizable()
+                    .aspectRatio( contentMode: .fit)
+                    .frame(width: 12, height: 12)
+                    .padding(.horizontal, 2)
                 
                 Text(currentBadge.livesLeft == 1 ? "\(currentBadge.livesLeft) miss left" : "\(currentBadge.livesLeft) misses left")
                 .font(.custom("Montserrat-Regular", size: 16))
