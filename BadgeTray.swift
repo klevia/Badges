@@ -31,7 +31,7 @@ struct BadgeTray: View {
                     TrayHeading()
                     BadgeImage()
                     CurrentBadgeSubHeading()
-                    BadgeTrayList()
+                    BadgeTrayList(triangleClicked: $triangleClicked)
                 }
             }
         }
@@ -149,6 +149,7 @@ struct CurrentBadgeSubHeading: View{
 
 struct BadgeTrayList: View{
     @EnvironmentObject var badge: BadgeViewModel
+    @Binding var triangleClicked : Bool
     
     var body: some View{
         
@@ -159,7 +160,11 @@ struct BadgeTrayList: View{
             
                 
             HStack(spacing: 0){
-              
+                
+                Button(action: {
+                    triangleClicked.toggle()
+                }){
+                    
                     Image("\(badgeItem.shape)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -180,6 +185,7 @@ struct BadgeTrayList: View{
                         )
                         .padding(.vertical, 4)
                         .padding(.horizontal, 16)
+                }
                 
                 
             
