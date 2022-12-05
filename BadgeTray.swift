@@ -153,6 +153,7 @@ struct BadgeTrayList: View{
     var body: some View{
         
         VStack(spacing: 16){
+
             
             ForEach(badge.currentBadgesStatus){ badgeItem in
             
@@ -197,14 +198,31 @@ struct BadgeTrayList: View{
                     
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
                 HStack(spacing: 4){
                     
-                    /*Image("Heart")
-                    
-                        .renderingMode(.template)
-                        .foregroundColor(Color(.systemPink))
-                        .frame(width: 12, height: 12)*/
+                    Image("Heart")
+                        .resizable()
+                        .aspectRatio( contentMode: .fit)
+                        .frame(width: 12, height: 12)
+                        .opacity(0)
+                        
+                        .background(
+                        
+                            LinearGradient(gradient: Gradient(stops: [
+                                Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 0),
+                                    Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 0.5),
+                                    Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 1)
+                                ]), startPoint: .leading, endPoint: .trailing)
+                            .mask(
+                                
+                                Image("Heart")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                
+                            )
+                        
+                        
+                        )
                     
                     Text("\(badgeItem.lives)")
                         .frame(width: 12, height: 12)
@@ -214,6 +232,7 @@ struct BadgeTrayList: View{
                 }
                 .padding(.trailing, 16)
                 .frame(maxHeight: .infinity, alignment: .top)
+
                 
                 
             }
