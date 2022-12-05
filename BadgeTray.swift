@@ -29,7 +29,7 @@ struct BadgeTray: View {
                 VStack(spacing: 0){
                     
                     TrayHeading()
-                    BadgeImage()
+                    MainBadge()
                     CurrentBadgeSubHeading()
                     BadgeTrayList()
                 }
@@ -81,30 +81,15 @@ struct TrayHeading: View{
     }
 }
 
-struct BadgeImage: View{ //We should replace this with current badge struct
+struct MainBadge: View{ //We should replace this with current badge struct
     
     @EnvironmentObject var badge: BadgeViewModel
-    
+   
     var body: some View{
         
         let currentBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
-        Image("\(currentBadge.shape)")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .opacity(0.25)
-            .frame(width:130,height: 130)
-            .overlay(
-                
-                Image("\(currentBadge.shape)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .mask(
-                        Color.white.opacity(1)
-                            .frame(height: CGFloat((Double(currentBadge.statusCount)/Double(currentBadge.toAchieveRepetition)))*130.0)
-                            .frame(maxHeight: .infinity, alignment: .bottom)
-                    )
-            )
+        BadgeImage(badgeItem: .constant(currentBadge), size: .constant(128))
             .padding(.top, 56)
             .padding(.bottom, 32)
         
@@ -160,24 +145,7 @@ struct BadgeTrayList: View{
                 
             HStack(spacing: 0){
               
-                    Image("\(badgeItem.shape)")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .opacity(0.25)
-                        .frame(width: 64, height: 64, alignment: .leading)
-                    
-                        .overlay(
-                            
-                            Image("\(badgeItem.shape)")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .mask(
-                                    Color.white.opacity(1)
-                                        .frame(height: CGFloat((Double(badgeItem.statusCount)/Double(badgeItem.toAchieveRepetition)))*64.0)
-                                        .frame(maxHeight: .infinity, alignment: .bottom)
-                                    
-                                )
-                        )
+                BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
                         .padding(.vertical, 4)
                         .padding(.horizontal, 16)
                 
