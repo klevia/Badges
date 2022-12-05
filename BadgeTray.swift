@@ -29,7 +29,7 @@ struct BadgeTray: View {
                 VStack(spacing: 0){
                     
                     TrayHeading()
-                    BadgeImage()
+                    MainBadge()
                     CurrentBadgeSubHeading()
                     BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked)
                 }
@@ -81,30 +81,15 @@ struct TrayHeading: View{
     }
 }
 
-struct BadgeImage: View{ //We should replace this with current badge struct
+struct MainBadge: View{ //We should replace this with current badge struct
     
     @EnvironmentObject var badge: BadgeViewModel
-    
+   
     var body: some View{
         
         let currentBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
-        Image("\(currentBadge.shape)")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .opacity(0.25)
-            .frame(width:130,height: 130)
-            .overlay(
-                
-                Image("\(currentBadge.shape)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .mask(
-                        Color.white.opacity(1)
-                            .frame(height: CGFloat((Double(currentBadge.statusCount)/Double(currentBadge.toAchieveRepetition)))*130.0)
-                            .frame(maxHeight: .infinity, alignment: .bottom)
-                    )
-            )
+        BadgeImage(badgeItem: .constant(currentBadge), size: .constant(128))
             .padding(.top, 56)
             .padding(.bottom, 32)
         
@@ -130,9 +115,11 @@ struct CurrentBadgeSubHeading: View{
             
             Group{
                 
-                Image(systemName: "heart.fill")
-                    .padding(.leading, 2)
-                    .padding(.trailing, 1)
+                Image("Heart")
+                    .resizable()
+                    .aspectRatio( contentMode: .fit)
+                    .frame(width: 12, height: 12)
+                    .padding(.horizontal, 2)
                 
                 Text(currentBadge.livesLeft == 1 ? "\(currentBadge.livesLeft) miss left" : "\(currentBadge.livesLeft) misses left")
                 .font(.custom("Montserrat-Regular", size: 16))
@@ -161,29 +148,8 @@ struct BadgeTrayList: View{
             
                 
             HStack(spacing: 0){
-                
-                Button(action: {
-                    goldClicked.toggle()
-                }){
-                    
-                    Image("\(badgeItem.shape)")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .opacity(0.25)
-                        .frame(width: 64, height: 64, alignment: .leading)
-                    
-                        .overlay(
-                            
-                            Image("\(badgeItem.shape)")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .mask(
-                                    Color.white.opacity(1)
-                                        .frame(height: CGFloat((Double(badgeItem.statusCount)/Double(badgeItem.toAchieveRepetition)))*64.0)
-                                        .frame(maxHeight: .infinity, alignment: .bottom)
-                                    
-                                )
-                        )
+              
+                BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
                         .padding(.vertical, 4)
                         .padding(.horizontal, 16)
                 }
@@ -197,7 +163,7 @@ struct BadgeTrayList: View{
                         .font(.custom("Montserrat-Medium", size: 16))
                     
                     Text(badgeItem.badgeAchieved ?
-                         "\(badgeItem.badgeAchievedDate.formatted())" :
+                         "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
                             "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.white)

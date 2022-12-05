@@ -15,7 +15,7 @@ struct BadgeView: View {
         
         ZStack{
             
-            Color.black.ignoresSafeArea()
+            Color.white.ignoresSafeArea()
             
             Button(action:{
                
@@ -50,23 +50,8 @@ struct CurrentBadge: View{
     var body: some View{
         
         let minimizedBadge: BadgeObject = badge.minimizedBadge()
-        
-        Image("\(minimizedBadge.shape)")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .opacity(0.25)
-        .frame(height: 200)
-        .overlay(
-            
-            Image("\(minimizedBadge.shape)")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .mask(
-                    Color.white.opacity(1)
-                        .frame(height: CGFloat((Double(minimizedBadge.statusCount)/Double(minimizedBadge.toAchieveRepetition)))*200.0)
-                        .frame(maxHeight: .infinity, alignment: .bottom)
-                )
-        )
+       
+        BadgeImage(badgeItem: .constant(minimizedBadge), size: .constant(200))
         
     }
 }

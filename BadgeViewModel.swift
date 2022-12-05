@@ -10,7 +10,7 @@ import SwiftUI
 
 class BadgeViewModel: ObservableObject{
     
-    let statuses: [Int] = [1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    let statuses: [Int] = [1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-2,-2]
     @Published var currentBadgesStatus: [BadgeObject] = badges
     
     func currentBadgeStatus(){
@@ -82,5 +82,15 @@ class BadgeViewModel: ObservableObject{
         }
         
         return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0]
+    }
+    
+    func formattedDate(badgeAchievedDate: Date) -> String{
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        
+        let returnString = "Earned on \(dateFormatter.string(from: badgeAchievedDate))"
+        return returnString
+        
     }
 }
