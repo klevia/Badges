@@ -10,7 +10,7 @@ import SwiftUI
 
 class BadgeViewModel: ObservableObject{
     
-    let statuses: [Int] = [1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-2,-2]
+    let statuses: [Int] = [1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     @Published var currentBadgesStatus: [BadgeObject] = badges
     
     func currentBadgeStatus(){
