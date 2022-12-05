@@ -144,85 +144,120 @@ struct BadgeTrayList: View{
             
             ForEach(badge.currentBadgesStatus){ badgeItem in
             
-                
-            HStack(spacing: 0){
-              
-                BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 16)
-                
-                
             
-                VStack(alignment: .leading, spacing: 4){
+                Button(action:{
                     
-                    Text(badgeItem.shape)
-                        .foregroundColor(.white)
-                        .font(.custom("Montserrat-Medium", size: 16))
-                    
-                    Text(badgeItem.badgeAchieved ?
-                         "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
-                            "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
-                    .font(.custom("Montserrat-Regular", size: 14))
-                    .foregroundColor(.white)
-                    .opacity(0.5)
-                    
+                    if badgeItem.badgeAchieved{
+                        print("Active")
+                    } else {
+                        
+                        
+                    }
+                }){
+                    BadgeCell(badgeItem: .constant(badgeItem))
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                HStack(spacing: 4){
-                    
-                    Image("Heart")
-                        .resizable()
-                        .aspectRatio( contentMode: .fit)
-                        .frame(width: 12, height: 12)
-                        .opacity(0)
-                        
-                        .background(
-                        
-                            LinearGradient(gradient: Gradient(stops: [
-                                Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
-                                                           saturation: badgeItem.endColor.saturation,
-                                                           brightness: badgeItem.endColor.brightness), location: 0.0),
-                                Gradient.Stop(color: Color(hue: badgeItem.midColor.hue,
-                                                           saturation: badgeItem.midColor.saturation,
-                                                           brightness: badgeItem.midColor.brightness), location: 0.5),
-                                Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
-                                                           saturation: badgeItem.endColor.saturation,
-                                                           brightness: badgeItem.endColor.brightness), location: 1.0),
-                                ]), startPoint: .leading, endPoint: .trailing)
-                            .mask(
-                                
-                                Image("Heart")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                
-                            )
-                        
-                        
-                        )
-                    
-                    Text("\(badgeItem.lives)")
-                        .frame(width: 12, height: 12)
-                        .foregroundColor(.white)
-                    
-                    
-                }
-                .padding(.trailing, 16)
-                .frame(maxHeight: .infinity, alignment: .top)
-
-                
-                
-            }
-            .padding(.vertical, 16)
-            .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
+                .buttonStyle(ButtonOpacity(opacity: badgeItem.badgeAchieved ? .constant(0.25) : .constant(1)))
             .padding(.horizontal, 24)
+            
             
         }
         
     }
     }
 }
-struct BadgeTray_Previews: PreviewProvider {
-    static var previews: some View {
-        BadgeTray()
+
+struct BadgeCell: View{
+    
+    @EnvironmentObject var badge: BadgeViewModel
+    @Binding var badgeItem: BadgeObject
+    var body: some View{
+        
+        
+        
+        HStack(spacing: 0){
+            
+            BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
+                .shadow(color: Color(hue: badgeItem.midColor.hue, saturation: badgeItem.midColor.saturation, brightness: badgeItem.midColor.brightness).opacity(badgeItem.badgeAchieved ? 0.5 : 0), radius: 4)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 16)
+            
+            
+            
+            VStack(alignment: .leading, spacing: 4){
+                
+                Text(badgeItem.shape)
+                    .foregroundColor(.white)
+                    .font(.custom("Montserrat-Medium", size: 16))
+                
+                Text(badgeItem.badgeAchieved ?
+                     "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
+                        "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
+                .font(.custom("Montserrat-Regular", size: 14))
+                .foregroundColor(.white)
+                .opacity(0.5)
+                
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 4){
+                
+                Image("Heart")
+                    .resizable()
+                    .aspectRatio( contentMode: .fit)
+                    .frame(width: 12, height: 12)
+                    .opacity(0)
+                
+                    .background(
+                        
+                        LinearGradient(gradient: Gradient(stops: [
+                            Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
+                                                       saturation: badgeItem.endColor.saturation,
+                                                       brightness: badgeItem.endColor.brightness), location: 0.0),
+                            Gradient.Stop(color: Color(hue: badgeItem.midColor.hue,
+                                                       saturation: badgeItem.midColor.saturation,
+                                                       brightness: badgeItem.midColor.brightness), location: 0.5),
+                            Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
+                                                       saturation: badgeItem.endColor.saturation,
+                                                       brightness: badgeItem.endColor.brightness), location: 1.0),
+                        ]), startPoint: .leading, endPoint: .trailing)
+                        .mask(
+                            
+                            Image("Heart")
+                                .resizable()
+                                .aspectRatio( contentMode: .fit)
+                            
+                        )
+                        
+                        
+                    )
+                
+                Text("\(badgeItem.lives)")
+                    .frame(width: 12, height: 12)
+                    .foregroundColor(.white)
+                
+                
+            }
+            .padding(.trailing, 16)
+            .frame(maxHeight: .infinity, alignment: .top)
+            
+            
+            
+        }
+        .padding(.vertical, 16)
+        .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
+        .opacity(badgeItem.statusCount == 0 ? 0.5 : 1)
+        
+    }
+}
+
+
+struct ButtonOpacity: ButtonStyle{
+    
+    @Binding var opacity: Double
+    
+    func makeBody(configuration: Self.Configuration) -> some View{
+        configuration.label
+           
+            .opacity(configuration.isPressed ? opacity : 1)
+            
     }
 }
