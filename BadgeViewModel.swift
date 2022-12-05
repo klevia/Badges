@@ -11,10 +11,11 @@ import SwiftUI
 class BadgeViewModel: ObservableObject{
     
     let statuses: [Int] = [1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    @Published var currentBadgesStatus: [BadgeObject] = badges
     
-    func currentBadgeStatus(defaultBadges: [BadgeObject]) -> [BadgeObject]{
+    func currentBadgeStatus(){
         
-        var currentBadgesStatus: [BadgeObject] = defaultBadges
+        currentBadgesStatus = badges
         
         for status in statuses{
             
@@ -45,6 +46,41 @@ class BadgeViewModel: ObservableObject{
             
         }
         
-        return currentBadgesStatus
+    }
+    
+    func minimizedBadge() -> BadgeObject{
+        
+        var currentBadgesStatusMB = badges
+        
+        for status in statuses{
+            
+            let lockedBadgeIndex = currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0].index
+            
+            if status == 1{
+                
+                currentBadgesStatusMB[lockedBadgeIndex].statusCount += 1
+                
+                if currentBadgesStatusMB[lockedBadgeIndex].statusCount == currentBadgesStatusMB[lockedBadgeIndex].toAchieveRepetition{
+                    currentBadgesStatusMB[lockedBadgeIndex].badgeAchieved = true
+                }
+                
+            } else if (status == -2){
+                
+                if currentBadgesStatusMB[lockedBadgeIndex].livesLeft == 0{
+                    
+                    currentBadgesStatusMB[lockedBadgeIndex].statusCount = 0
+                    currentBadgesStatusMB[lockedBadgeIndex].livesLeft = currentBadgesStatusMB[lockedBadgeIndex].lives
+                   
+                }else{
+                    
+                    currentBadgesStatusMB[lockedBadgeIndex].livesLeft -= 1
+                    
+                }
+                
+            }
+            
+        }
+        
+        return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0]
     }
 }

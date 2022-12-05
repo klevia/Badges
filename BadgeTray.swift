@@ -26,7 +26,7 @@ struct BadgeTray: View {
                 
                 BadgeBackground()
                 
-                VStack{
+                VStack(spacing: 0){
                     
                     TrayHeading()
                     BadgeImage()
@@ -50,10 +50,11 @@ struct BadgeBackground: View{
     var body: some View{
         
         
-        let currentBadge = badge.currentBadgeStatus(defaultBadges: badges).first(where: {$0.badgeAchieved == false})!
+        let currentBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
         Image("\(currentBadge.shape)Background")
-                    .edgesIgnoringSafeArea(.all)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
         
     }
 }
@@ -67,22 +68,26 @@ struct TrayHeading: View{
             Text("Sleep 7-9 hours")
                 .font(.custom("Montserrat-Regular", size: 12))
                 .opacity(0.5)
-                
+            
             Text("Badges")
                 .font(.custom("Montserrat-Medium", size: 16))
                 .opacity(0.75)
+            
         }
         .foregroundColor(.black)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 16)
            
     }
 }
 
 struct BadgeImage: View{ //We should replace this with current badge struct
+    
     @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View{
         
-        let currentBadge = badge.currentBadgeStatus(defaultBadges: badges).first(where: {$0.badgeAchieved == false})!
+        let currentBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
         Image("\(currentBadge.shape)")
             .resizable()
@@ -99,31 +104,45 @@ struct BadgeImage: View{ //We should replace this with current badge struct
                             .frame(height: CGFloat((Double(currentBadge.statusCount)/Double(currentBadge.toAchieveRepetition)))*130.0)
                             .frame(maxHeight: .infinity, alignment: .bottom)
                     )
-            )    }
+            )
+            .padding(.top, 56)
+            .padding(.bottom, 32)
+        
+    }
 }
 
 struct CurrentBadgeSubHeading: View{
     @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View{
-        let currentBadge = badge.currentBadgeStatus(defaultBadges: badges).first(where: {$0.badgeAchieved == false})!
+        
+        let currentBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
         Text("\(currentBadge.shape)")
-            .bold()
-            .font(.headline)
+            .font(.custom("Montserrat-Medium", size: 20))
             .foregroundColor(.white)
-            .padding(.bottom,1)
-        HStack{
-            Text((currentBadge.toAchieveRepetition - currentBadge.statusCount) == 1 ? "\(currentBadge.toAchieveRepetition - currentBadge.statusCount) repetition to go." : "\(currentBadge.toAchieveRepetition - currentBadge.statusCount) repetition to go.")
-                .foregroundColor(.white)
-            Image(systemName: "heart.fill")
-                .foregroundColor(Color(.systemPink))
-                .opacity(0.4)
-            Text(currentBadge.livesLeft == 1 ? "\(currentBadge.livesLeft) miss left" : "\(currentBadge.livesLeft) misses left")
-                .foregroundColor(.white)
-                .opacity(0.4)
+            .padding(.bottom, 8)
+        
+        HStack(spacing: 0){
+            
+            Text((currentBadge.toAchieveRepetition - currentBadge.statusCount) == 1 ? "\(currentBadge.toAchieveRepetition - currentBadge.statusCount) repetition to go." : "\(currentBadge.toAchieveRepetition - currentBadge.statusCount) repetitions to go.")
+                .font(.custom("Montserrat-Medium", size: 16))
+            
+            Group{
+                
+                Image(systemName: "heart.fill")
+                    .padding(.leading, 2)
+                    .padding(.trailing, 1)
+                
+                Text(currentBadge.livesLeft == 1 ? "\(currentBadge.livesLeft) miss left" : "\(currentBadge.livesLeft) misses left")
+                .font(.custom("Montserrat-Regular", size: 16))
+    
+            }
+            .opacity(0.33)
+            
         }
-        .padding(.bottom,47)
+        .foregroundColor(.white)
+        .padding(.bottom, 48)
         
     }
 }
@@ -135,14 +154,12 @@ struct BadgeTrayList: View{
         
         VStack(spacing: 16){
             
-        ForEach(0..<badge.currentBadgeStatus(defaultBadges: badges).count){ i in
+            ForEach(badge.currentBadgesStatus){ badgeItem in
             
-            
+                
             HStack(spacing: 0){
-                Button(action: {
-                    //triangleClicked.toggle()
-                }){
-                    Image("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
+              
+                    Image("\(badgeItem.shape)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .opacity(0.25)
@@ -150,46 +167,52 @@ struct BadgeTrayList: View{
                     
                         .overlay(
                             
-                            Image("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
+                            Image("\(badgeItem.shape)")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .mask(
                                     Color.white.opacity(1)
-                                        .frame(height: CGFloat((Double(badge.currentBadgeStatus(defaultBadges: badges).map({$0.statusCount})[i])/Double(badge.currentBadgeStatus(defaultBadges: badges).map({$0.toAchieveRepetition})[i])))*70.0)
+                                        .frame(height: CGFloat((Double(badgeItem.statusCount)/Double(badgeItem.toAchieveRepetition)))*64.0)
                                         .frame(maxHeight: .infinity, alignment: .bottom)
                                     
                                 )
                         )
                         .padding(.vertical, 4)
                         .padding(.horizontal, 16)
-                }
                 
-                VStack(alignment: .leading){
-                    Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.shape})[i])")
+                
+            
+                VStack(alignment: .leading, spacing: 4){
+                    
+                    Text(badgeItem.shape)
                         .foregroundColor(.white)
-                    Text((badge.currentBadgeStatus(defaultBadges: badges).map({$0.badgeAchieved})[i]) == true ?
-                         " \(badge.currentBadgeStatus(defaultBadges: badges).map({$0.badgeAchievedDate.formatted()})[i])" :
-                            "\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.beginRepetition})[i]) - \(badge.currentBadgeStatus(defaultBadges: badges).map({$0.endRepetition})[i]) repetition")
+                        .font(.custom("Montserrat-Medium", size: 16))
+                    
+                    Text(badgeItem.badgeAchieved ?
+                         "\(badgeItem.badgeAchievedDate.formatted())" :
+                            "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
+                    .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.white)
-                    .opacity(0.4)
+                    .opacity(0.5)
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack(spacing: 4){
                     
-                    Image("Heart")
+                    /*Image("Heart")
+                    
                         .renderingMode(.template)
                         .foregroundColor(Color(.systemPink))
-                        .frame(width: 12, height: 12)
+                        .frame(width: 12, height: 12)*/
                     
-                    Text("\(badge.currentBadgeStatus(defaultBadges: badges).map({$0.lives})[i])")
+                    Text("\(badgeItem.lives)")
                         .frame(width: 12, height: 12)
                         .foregroundColor(.white)
                     
                     
                 }
                 .padding(.trailing, 16)
-                
                 .frame(maxHeight: .infinity, alignment: .top)
                 
                 

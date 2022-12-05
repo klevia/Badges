@@ -18,9 +18,8 @@ struct BadgeView: View {
             Color.black.ignoresSafeArea()
             
             Button(action:{
-               print(badge.currentBadgeStatus(defaultBadges: badges))
-                //print(badge.currentBadgeStatus(defaultBadges: badges).count)
-
+               
+                badge.currentBadgeStatus()
                 withAnimation(){
                     sheetPresented = true
                 }
@@ -50,21 +49,21 @@ struct CurrentBadge: View{
     
     var body: some View{
         
-        let currentBadge = badge.currentBadgeStatus(defaultBadges: badges).first(where: {$0.badgeAchieved == false})!
+        let minimizedBadge: BadgeObject = badge.minimizedBadge()
         
-        Image("\(currentBadge.shape)")
+        Image("\(minimizedBadge.shape)")
         .resizable()
         .aspectRatio(contentMode: .fit)
         .opacity(0.25)
         .frame(height: 200)
         .overlay(
             
-            Image("\(currentBadge.shape)")
+            Image("\(minimizedBadge.shape)")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .mask(
                     Color.white.opacity(1)
-                        .frame(height: CGFloat((Double(currentBadge.statusCount)/Double(currentBadge.toAchieveRepetition)))*200.0)
+                        .frame(height: CGFloat((Double(minimizedBadge.statusCount)/Double(minimizedBadge.toAchieveRepetition)))*200.0)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                 )
         )
