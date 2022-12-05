@@ -31,7 +31,7 @@ struct BadgeTray: View {
                     TrayHeading()
                     MainBadge()
                     CurrentBadgeSubHeading()
-                    BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked)
+                    BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked,rubyClicked: $rubyClicked)
                 }
             }
         }
@@ -138,92 +138,97 @@ struct BadgeTrayList: View{
     @EnvironmentObject var badge: BadgeViewModel
     @Binding var triangleClicked : Bool
     @Binding var goldClicked : Bool
+    @Binding var rubyClicked : Bool
     
     var body: some View{
         
         VStack(spacing: 16){
-
+            
             
             ForEach(badge.currentBadgesStatus){ badgeItem in
-            
-                
-            HStack(spacing: 0){
-              
-                BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 16)
-                }
                 
                 
-            
-                VStack(alignment: .leading, spacing: 4){
+                HStack(spacing: 0){
                     
-                    Text(badgeItem.shape)
+                    Button(action: {
+                        rubyClicked.toggle()
+                    }){
+                        
+                        BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 16)
+                    }
+                    
+                    
+                    
+                    VStack(alignment: .leading, spacing: 4){
+                        
+                        Text(badgeItem.shape)
+                            .foregroundColor(.white)
+                            .font(.custom("Montserrat-Medium", size: 16))
+                        
+                        Text(badgeItem.badgeAchieved ?
+                             "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
+                                "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
+                        .font(.custom("Montserrat-Regular", size: 14))
                         .foregroundColor(.white)
-                        .font(.custom("Montserrat-Medium", size: 16))
-                    
-                    Text(badgeItem.badgeAchieved ?
-                         "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
-                            "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
-                    .font(.custom("Montserrat-Regular", size: 14))
-                    .foregroundColor(.white)
-                    .opacity(0.5)
-                    
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                HStack(spacing: 4){
-                    
-                    Image("Heart")
-                        .resizable()
-                        .aspectRatio( contentMode: .fit)
-                        .frame(width: 12, height: 12)
-                        .opacity(0)
+                        .opacity(0.5)
                         
-                        .background(
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack(spacing: 4){
                         
-                            LinearGradient(gradient: Gradient(stops: [
-                                Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
-                                                           saturation: badgeItem.endColor.saturation,
-                                                           brightness: badgeItem.endColor.brightness), location: 0.0),
-                                Gradient.Stop(color: Color(hue: badgeItem.midColor.hue,
-                                                           saturation: badgeItem.midColor.saturation,
-                                                           brightness: badgeItem.midColor.brightness), location: 0.5),
-                                Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
-                                                           saturation: badgeItem.endColor.saturation,
-                                                           brightness: badgeItem.endColor.brightness), location: 1.0),
-                                ]), startPoint: .leading, endPoint: .trailing)
-                            .mask(
+                        Image("Heart")
+                            .resizable()
+                            .aspectRatio( contentMode: .fit)
+                            .frame(width: 12, height: 12)
+                            .opacity(0)
+                        
+                            .background(
                                 
-                                Image("Heart")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
+                                LinearGradient(gradient: Gradient(stops: [
+                                    Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
+                                                               saturation: badgeItem.endColor.saturation,
+                                                               brightness: badgeItem.endColor.brightness), location: 0.0),
+                                    Gradient.Stop(color: Color(hue: badgeItem.midColor.hue,
+                                                               saturation: badgeItem.midColor.saturation,
+                                                               brightness: badgeItem.midColor.brightness), location: 0.5),
+                                    Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
+                                                               saturation: badgeItem.endColor.saturation,
+                                                               brightness: badgeItem.endColor.brightness), location: 1.0),
+                                ]), startPoint: .leading, endPoint: .trailing)
+                                .mask(
+                                    
+                                    Image("Heart")
+                                        .resizable()
+                                        .aspectRatio( contentMode: .fit)
+                                    
+                                )
+                                
                                 
                             )
                         
+                        Text("\(badgeItem.lives)")
+                            .frame(width: 12, height: 12)
+                            .foregroundColor(.white)
                         
-                        )
+                        
+                    }
+                    .padding(.trailing, 16)
+                    .frame(maxHeight: .infinity, alignment: .top)
                     
-                    Text("\(badgeItem.lives)")
-                        .frame(width: 12, height: 12)
-                        .foregroundColor(.white)
                     
                     
                 }
-                .padding(.trailing, 16)
-                .frame(maxHeight: .infinity, alignment: .top)
-
+                .padding(.vertical, 16)
+                .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
+                .padding(.horizontal, 24)
                 
-                
-            }
-            .padding(.vertical, 16)
-            .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
-            .padding(.horizontal, 24)
-            
-        }
+            }}
         
     }
     }
-}
+
 struct BadgeTray_Previews: PreviewProvider {
     static var previews: some View {
         BadgeTray()

@@ -10,8 +10,14 @@ import SwiftUI
 struct BadgeEarnedPopup: View {
     
     @Binding var goldClicked : Bool
+    @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View {
+        
+        let achievedBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == true})!
+        let substring = String(achievedBadge.endRepetition.dropLast(2))
+        
+        
         VStack{
             VStack(spacing: 4){
                 HStack(spacing: 72){
@@ -31,19 +37,19 @@ struct BadgeEarnedPopup: View {
                 .frame(maxWidth: .infinity,alignment: .trailing)
                 .padding(.trailing,16)
                 
-                Image("Sapphire")
+                Image("\(achievedBadge.shape)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150, alignment: .center)
-                    .shadow(color: .blue, radius: 30)
+                    .shadow(color: Color(hue: achievedBadge.midColor.hue, saturation: achievedBadge.midColor.saturation, brightness: achievedBadge.midColor.brightness), radius: 30)
                 
-                Text("21 repetitions complete")
+                Text("\(substring) repetitions complete")
                     .font(.custom("Montserrat-Medium", size: 20))
                     .bold()
                     .foregroundColor(.white)
                     .padding(.top,19)
                 
-                Text("Earned on 25th Jan 2022")
+                Text("\(badge.formattedDate(badgeAchievedDate: achievedBadge.badgeAchievedDate))")
                     .font(.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(.white).opacity(0.5)
                     .padding(.horizontal,32)
@@ -65,7 +71,15 @@ struct BadgeEarnedPopup: View {
        
         .padding(.vertical,32)
         .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.black.opacity(0.9)))
+        .background(
+            ZStack{
+                RoundedRectangle(cornerRadius: 24)
+                    .foregroundColor(Color.black.opacity(0.9))
+                Image("\(achievedBadge.shape)Background")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+               
+            }) //.foregroundColor(Color.black.opacity(0.9)))
         .padding(.horizontal,16)
     }
     

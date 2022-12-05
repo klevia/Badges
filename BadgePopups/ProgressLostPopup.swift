@@ -10,8 +10,11 @@ import SwiftUI
 struct ProgressLostPopup: View {
     
     @Binding var rubyClicked : Bool
+    @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View {
+        let lostBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == false})! //to be changed
+        
         VStack{
             VStack(spacing: 5){
                 HStack(spacing: 75){
@@ -32,16 +35,39 @@ struct ProgressLostPopup: View {
                 .padding(.trailing,16)
                 
                 ZStack{
-                    Polygon(sides : 6)
-                        .rotation(Angle(degrees: 30))
-                    //   .stroke(Color.blue, lineWidth: 3)
-                        .shadow(color: .blue, radius: 30)
-                        .frame(width: 150,height: 150,alignment: .leading)
+                    BadgeImage(badgeItem: .constant(lostBadge), size: .constant(150))
+                        .shadow(color: Color(hue: lostBadge.midColor.hue, saturation: lostBadge.midColor.saturation, brightness: lostBadge.midColor.brightness), radius: 30)
+                        .frame(width: 150,height: 150,alignment: .center)
                     
-                    Image(systemName: "bolt.heart.fill")
-                        .renderingMode(.original)
-                        .foregroundColor(Color(hue: 0.56111, saturation: 1, brightness: 1))
-                        .font(.system(size: 54))
+                    Image("BrokenHeart")
+                        .resizable()
+                        .aspectRatio( contentMode: .fit)
+                        .frame(width: 60, height: 50)
+                        .opacity(0)
+                    
+                        .background(
+                            
+                            LinearGradient(gradient: Gradient(stops: [
+                                Gradient.Stop(color: Color(hue: lostBadge.endColor.hue,
+                                                           saturation: lostBadge.endColor.saturation,
+                                                           brightness: lostBadge.endColor.brightness), location: 0.0),
+                                Gradient.Stop(color: Color(hue: lostBadge.midColor.hue,
+                                                           saturation: lostBadge.midColor.saturation,
+                                                           brightness: lostBadge.midColor.brightness), location: 0.5),
+                                Gradient.Stop(color: Color(hue: lostBadge.endColor.hue,
+                                                           saturation: lostBadge.endColor.saturation,
+                                                           brightness: lostBadge.endColor.brightness), location: 1.0),
+                            ]), startPoint: .leading, endPoint: .trailing)
+                            .mask(
+                                
+                                Image("BrokenHeart")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                
+                            )
+                            
+                            
+                        )
                 }
                 
             
