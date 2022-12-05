@@ -209,9 +209,15 @@ struct BadgeTrayList: View{
                         .background(
                         
                             LinearGradient(gradient: Gradient(stops: [
-                                Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 0),
-                                    Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 0.5),
-                                    Gradient.Stop(color: Color(hue: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.hue})[i], saturation: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.saturation})[i], brightness: badge.currentBadgeStatus(defaultBadges: badges).map({$0.midColor.brightness})[i]), location: 1)
+                                Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
+                                                           saturation: badgeItem.endColor.saturation,
+                                                           brightness: badgeItem.endColor.brightness), location: 0.0),
+                                Gradient.Stop(color: Color(hue: badgeItem.midColor.hue,
+                                                           saturation: badgeItem.midColor.saturation,
+                                                           brightness: badgeItem.midColor.brightness), location: 0.5),
+                                Gradient.Stop(color: Color(hue: badgeItem.endColor.hue,
+                                                           saturation: badgeItem.endColor.saturation,
+                                                           brightness: badgeItem.endColor.brightness), location: 1.0),
                                 ]), startPoint: .leading, endPoint: .trailing)
                             .mask(
                                 
