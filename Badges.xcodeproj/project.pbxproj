@@ -15,6 +15,7 @@
 		497BD670293C83120041E3DA /* BadgeEarnedPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD66F293C83120041E3DA /* BadgeEarnedPopup.swift */; };
 		497BD672293C83650041E3DA /* ProgressLostPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD671293C83650041E3DA /* ProgressLostPopup.swift */; };
 		497BD679293CEE080041E3DA /* HeartGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD678293CEE080041E3DA /* HeartGradient.swift */; };
+		497BD67D293DEAE20041E3DA /* BadgeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD67C293DEAE20041E3DA /* BadgeViews.swift */; };
 		8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553D2938FDD4001792F6 /* BadgesApp.swift */; };
 		814155402938FDD4001792F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553F2938FDD4001792F6 /* ContentView.swift */; };
 		814155422938FDD5001792F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155412938FDD5001792F6 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		497BD66F293C83120041E3DA /* BadgeEarnedPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeEarnedPopup.swift; sourceTree = "<group>"; };
 		497BD671293C83650041E3DA /* ProgressLostPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLostPopup.swift; sourceTree = "<group>"; };
 		497BD678293CEE080041E3DA /* HeartGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartGradient.swift; sourceTree = "<group>"; };
+		497BD67C293DEAE20041E3DA /* BadgeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViews.swift; sourceTree = "<group>"; };
 		8141553A2938FDD4001792F6 /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8141553D2938FDD4001792F6 /* BadgesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesApp.swift; sourceTree = "<group>"; };
 		8141553F2938FDD4001792F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		814155312938FDD4001792F6 = {
 			isa = PBXGroup;
 			children = (
+				497BD67C293DEAE20041E3DA /* BadgeViews.swift */,
 				497BD673293C840E0041E3DA /* BadgePopups */,
 				497BD66B293C7D270041E3DA /* BadgeTray.swift */,
 				497BD669293BC24A0041E3DA /* BadgeViewModel.swift */,
@@ -182,6 +185,7 @@
 				497BD668293BC1CD0041E3DA /* BadgeView.swift in Sources */,
 				497BD679293CEE080041E3DA /* HeartGradient.swift in Sources */,
 				497BD66A293BC24A0041E3DA /* BadgeViewModel.swift in Sources */,
+				497BD67D293DEAE20041E3DA /* BadgeViews.swift in Sources */,
 				8141554E2938FF2F001792F6 /* Polygon.swift in Sources */,
 				497BD672293C83650041E3DA /* ProgressLostPopup.swift in Sources */,
 				8141554C2938FF03001792F6 /* Star.swift in Sources */,

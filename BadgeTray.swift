@@ -190,7 +190,7 @@ struct BadgeTrayList: View{
                         .font(.custom("Montserrat-Medium", size: 16))
                     
                     Text(badgeItem.badgeAchieved ?
-                         "\(badgeItem.badgeAchievedDate.formatted())" :
+                         "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
                             "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
                     .font(.custom("Montserrat-Regular", size: 14))
                     .foregroundColor(.white)
