@@ -17,36 +17,17 @@ struct ProgressLostPopup: View {
         
         VStack{
             VStack(spacing: 1){
-                HStack(spacing: 72){
-                    Text("Sleep 7-9 hours")
-                        .font(.system(size: 12))
-                        .foregroundColor(.white)
-                    
-                    Button(action: {
-                        rubyClicked.toggle()
-                    }){
-                        Image(systemName: "xmark.circle.fill")
-                          //  .renderingMode(.original)
-                          //  .foregroundColor(Color(.gray)).opacity(0.3)
-                            .font(.system(size: 40))
-                    }
-                }
-                .frame(maxWidth: .infinity,alignment: .trailing)
-                .padding(.trailing,16)
-                .padding(.bottom,35)
                 
-                ZStack{
-                    BadgeImage(badgeItem: .constant(lostBadge), size: .constant(180))
-                       // .shadow(color: Color(hue: lostBadge.midColor.hue, saturation: lostBadge.midColor.saturation, brightness: lostBadge.midColor.brightness), radius: 30)
-                        .frame(width: 200,height: 200,alignment: .center)
+                    Text("Sleep 7-9 hours")
+                        .font(.custom("Montserrat-Medium", size: 12))
+                        .foregroundColor(.white)
+                        .padding(.bottom,39)
                     
                     Image("BrokenHeart")
                         .resizable()
                         .aspectRatio( contentMode: .fit)
-                        .frame(width: 60, height: 50,alignment: .center)
-                  
+                        .frame(width: 98, height: 80,alignment: .center)
                         .opacity(0)
-                    
                         .background(
                             
                             LinearGradient(gradient: Gradient(stops: [
@@ -70,7 +51,7 @@ struct ProgressLostPopup: View {
                             
                             
                         )
-                }
+                
                 Text("You ran out of misses")
                     .font(.system(size: 20))
                     .foregroundColor(.white)
