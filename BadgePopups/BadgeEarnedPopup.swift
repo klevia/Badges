@@ -69,18 +69,22 @@ struct BadgeEarnedPopup: View {
             }
         }
        
-        .padding(.vertical,32)
+        .padding(.bottom,32)
+        
         .frame(maxWidth: .infinity)
         .background(
-            ZStack{
-                RoundedRectangle(cornerRadius: 24)
-                    .foregroundColor(Color.black.opacity(0.9))
+            
+              //  RoundedRectangle(cornerRadius: 24)
+                //    .foregroundColor(Color.black.opacity(0.9))
                 Image("\(achievedBadge.shape)Background")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
+                    .background(Color.black.opacity(0.9))
                
-            }) //.foregroundColor(Color.black.opacity(0.9)))
-        .padding(.horizontal,16)
+            ) //.foregroundColor(Color.black.opacity(0.9)))
+        .cornerRadius(24)
+        .padding(.horizontal,24)
+        
     }
     
 }
