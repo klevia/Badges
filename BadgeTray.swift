@@ -55,6 +55,15 @@ struct BadgeBackground: View{
         Image("\(currentBadge.shape)Background")
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .mask(
+                
+                LinearGradient(gradient: Gradient(stops: [
+                    Gradient.Stop(color: .white, location: 0),
+                    Gradient.Stop(color: .white.opacity(0), location: 0.85),
+                    Gradient.Stop(color: .white.opacity(0), location: 1)
+                ]), startPoint: .top, endPoint: .bottom)
+            )
+
         
     }
 }

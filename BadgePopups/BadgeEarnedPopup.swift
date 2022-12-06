@@ -83,9 +83,9 @@ struct BadgeEarnedPopup: View {
         .padding(.vertical,16)
         .frame(maxWidth: .infinity)
         .background(
-            ZStack{
-                RoundedRectangle(cornerRadius: 24)
-                    .foregroundColor(Color.black.opacity(0.9))
+            
+              //  RoundedRectangle(cornerRadius: 24)
+                //    .foregroundColor(Color.black.opacity(0.9))
                 Image("\(achievedBadge.shape)Background")
                     .resizable()
                     .cornerRadius(24)
