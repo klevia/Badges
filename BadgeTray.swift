@@ -31,7 +31,7 @@ struct BadgeTray: View {
                     TrayHeading()
                     MainBadge()
                     CurrentBadgeSubHeading()
-                    BadgeTrayList()
+                    BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked,rubyClicked: $rubyClicked)
                 }
             }
         }
@@ -136,11 +136,14 @@ struct CurrentBadgeSubHeading: View{
 
 struct BadgeTrayList: View{
     @EnvironmentObject var badge: BadgeViewModel
+    @Binding var triangleClicked : Bool
+    @Binding var goldClicked : Bool
+    @Binding var rubyClicked : Bool
     
     var body: some View{
         
         VStack(spacing: 16){
-
+            
             
             ForEach(badge.currentBadgesStatus){ badgeItem in
             

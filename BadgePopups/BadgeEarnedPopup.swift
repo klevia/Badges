@@ -10,13 +10,19 @@ import SwiftUI
 struct BadgeEarnedPopup: View {
     
     @Binding var goldClicked : Bool
+    @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View {
+        
+        let achievedBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == true})!
+        let substring = String(achievedBadge.endRepetition.dropLast(2))
+        
+        
         VStack{
-            VStack(spacing: 5){
-                HStack(spacing: 75){
+            VStack(spacing: 4){
+                HStack(spacing: 72){
                     Text("Sleep 7-9 hours")
-                        .font(.system(size: 12))
+                        .font(.custom("Montserrat-Medium", size: 12))
                         .foregroundColor(.white)
                     
                     Button(action: {
@@ -31,41 +37,49 @@ struct BadgeEarnedPopup: View {
                 .frame(maxWidth: .infinity,alignment: .trailing)
                 .padding(.trailing,16)
                 
-                Polygon(sides : 6)
-                    .rotation(Angle(degrees: 30))
-                    .fill(Color(.systemBlue))
-                    .shadow(color: .blue, radius: 30)
-                    .frame(width: 150,height: 150,alignment: .leading)
+                Image("\(achievedBadge.shape)")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 150, height: 150, alignment: .center)
+                    .shadow(color: Color(hue: achievedBadge.midColor.hue, saturation: achievedBadge.midColor.saturation, brightness: achievedBadge.midColor.brightness), radius: 30)
                 
-            
-                
-                Text("21 repetitions complete")
-                    .font(.system(size: 20))
+                Text("\(substring) repetitions complete")
+                    .font(.custom("Montserrat-Medium", size: 20))
+                    .bold()
                     .foregroundColor(.white)
-                Text("Earned on 25th Jan 2022")
-                    .font(.system(size: 14))
+                    .padding(.top,19)
+                
+                Text("\(badge.formattedDate(badgeAchievedDate: achievedBadge.badgeAchievedDate))")
+                    .font(.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(.white).opacity(0.5)
                     .padding(.horizontal,32)
-                    .padding(.bottom,30)
+                    .padding(.bottom,35)
                 
                 Button(action: {
                     goldClicked.toggle()
                 }){
                     Text("Tell a friend")
+                        .font(.custom("Montserrat-Medium", size: 16))
                         .foregroundColor(Color.black)
                         .background(Capsule()
                             .foregroundColor(.white)
                             .frame(width: 180,height: 50))
+                        .padding(.bottom,16)
                 }
             }
         }
        
         .padding(.vertical,32)
-   
         .frame(maxWidth: .infinity)
-       
-    
-        .background(Color(hue: 0.5611, saturation: 1, brightness: 0.15))
+        .background(
+            ZStack{
+                RoundedRectangle(cornerRadius: 24)
+                    .foregroundColor(Color.black.opacity(0.9))
+                Image("\(achievedBadge.shape)Background")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+               
+            }) //.foregroundColor(Color.black.opacity(0.9)))
         .padding(.horizontal,16)
     }
     
