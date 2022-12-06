@@ -18,25 +18,34 @@ struct BadgeEarnedPopup: View {
         let substring = String(achievedBadge.endRepetition.dropLast(2))
         
         
-        VStack{
+        VStack(){
             VStack(spacing: 4){
-                HStack(spacing: 72){
+                
+                ZStack(){
                     Text("Sleep 7-9 hours")
                         .font(.custom("Montserrat-Medium", size: 12))
                         .foregroundColor(.white)
-                    
                     Button(action: {
                         goldClicked.toggle()
                     }){
-                        Image(systemName: "x.circle.fill")
-                            .renderingMode(.original)
-                            .foregroundColor(Color(.gray)).opacity(0.3)
-                            .font(.system(size: 40))
+                        Image(systemName: "xmark")
+                            .foregroundColor(Color(.white))
+                            .font(.system(size: 16,weight: .light ,design: .rounded))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .foregroundColor(Color.white.opacity(0.1))
+                            )
+                          
+                            
                     }
-                }
-                .frame(maxWidth: .infinity,alignment: .trailing)
-                .padding(.trailing,16)
+                    .frame(maxWidth: .infinity,alignment: .trailing)
+                    .padding(.trailing,16)
                 
+ 
+                }
+                .padding(.bottom,15)
+             
                 Image("\(achievedBadge.shape)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -61,15 +70,17 @@ struct BadgeEarnedPopup: View {
                     Text("Tell a friend")
                         .font(.custom("Montserrat-Medium", size: 16))
                         .foregroundColor(Color.black)
+                        .padding()
+                        .padding(.horizontal,16)
                         .background(Capsule()
-                            .foregroundColor(.white)
-                            .frame(width: 180,height: 50))
-                        .padding(.bottom,16)
+                            .foregroundColor(.white))
+                       
                 }
+            
             }
         }
-       
-        .padding(.vertical,32)
+        .padding(.bottom,16)
+        .padding(.vertical,16)
         .frame(maxWidth: .infinity)
         .background(
             ZStack{
@@ -77,9 +88,10 @@ struct BadgeEarnedPopup: View {
                     .foregroundColor(Color.black.opacity(0.9))
                 Image("\(achievedBadge.shape)Background")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(24)
+           
                
-            }) //.foregroundColor(Color.black.opacity(0.9)))
+            })
         .padding(.horizontal,16)
     }
     

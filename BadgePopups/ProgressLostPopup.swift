@@ -16,8 +16,8 @@ struct ProgressLostPopup: View {
         let lostBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == false})! //to be changed
         
         VStack{
-            VStack(spacing: 5){
-                HStack(spacing: 75){
+            VStack(spacing: 1){
+                HStack(spacing: 72){
                     Text("Sleep 7-9 hours")
                         .font(.system(size: 12))
                         .foregroundColor(.white)
@@ -33,16 +33,18 @@ struct ProgressLostPopup: View {
                 }
                 .frame(maxWidth: .infinity,alignment: .trailing)
                 .padding(.trailing,16)
+                .padding(.bottom,35)
                 
                 ZStack{
-                    BadgeImage(badgeItem: .constant(lostBadge), size: .constant(150))
-                        .shadow(color: Color(hue: lostBadge.midColor.hue, saturation: lostBadge.midColor.saturation, brightness: lostBadge.midColor.brightness), radius: 30)
-                        .frame(width: 150,height: 150,alignment: .center)
+                    BadgeImage(badgeItem: .constant(lostBadge), size: .constant(180))
+                       // .shadow(color: Color(hue: lostBadge.midColor.hue, saturation: lostBadge.midColor.saturation, brightness: lostBadge.midColor.brightness), radius: 30)
+                        .frame(width: 200,height: 200,alignment: .center)
                     
                     Image("BrokenHeart")
                         .resizable()
                         .aspectRatio( contentMode: .fit)
-                        .frame(width: 60, height: 50)
+                        .frame(width: 60, height: 50,alignment: .center)
+                  
                         .opacity(0)
                     
                         .background(
@@ -69,13 +71,10 @@ struct ProgressLostPopup: View {
                             
                         )
                 }
-                
-            
-                
                 Text("You ran out of misses")
                     .font(.system(size: 20))
                     .foregroundColor(.white)
-                    .padding(.top, 24)
+                    .padding(.top, 23)
                 
                 Text("On route 21st - 45th repetition, you missed the habit more than 4 times. Let's start again and stronger this time")
                     .multilineTextAlignment(.center)
@@ -92,7 +91,7 @@ struct ProgressLostPopup: View {
                         .background(Capsule()
                             .foregroundColor(.white)
                             .frame(width: 133,height: 50))
-                        .padding(.top,37)
+                        .padding(.bottom,16)
                 }
             }
         }

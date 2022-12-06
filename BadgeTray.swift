@@ -152,6 +152,7 @@ struct BadgeTrayList: View{
                     
                     if badgeItem.badgeAchieved{
                         print("Active")
+                        goldClicked.toggle()
                     } else {
                         
                         
