@@ -53,32 +53,33 @@ struct ProgressLostPopup: View {
                         )
                 
                 Text("You ran out of misses")
-                    .font(.system(size: 20))
+                    .font(.custom("Montserrat-Medium", size: 20))
+                    .bold()
                     .foregroundColor(.white)
                     .padding(.top, 23)
                 
                 Text("On route 21st - 45th repetition, you missed the habit more than 4 times. Let's start again and stronger this time")
                     .multilineTextAlignment(.center)
-                    .font(.system(size: 14))
+                    .font(.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(.white).opacity(0.5)
                     .padding(.horizontal,32)
-                    .padding(.bottom,30)
+                    .padding(.bottom,39)
                 
                 Button(action: {
                     rubyClicked.toggle()
                 }){
                     Text("Close")
+                        .font(.custom("Montserrat-Medium", size: 16))
                         .foregroundColor(Color.black)
+                        .padding()
+                        .padding(.horizontal,16)
                         .background(Capsule()
-                            .foregroundColor(.white)
-                            .frame(width: 133,height: 50))
-                        .padding(.bottom,16)
+                            .foregroundColor(.white))
                 }
             }
         }
-       
-        .padding(.vertical,32)
-   
+        .padding(.bottom,16)
+        .padding(.vertical,16)
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: 24)
             .fill(Color(hue: 0.5611, saturation: 1, brightness: 0.15)))
