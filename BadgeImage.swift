@@ -11,7 +11,7 @@ struct BadgeImage: View {
     
     @Binding var badgeItem: BadgeObject
     @Binding var size: CGFloat
-    
+    @State var filledImage: Bool = false
     var body: some View {
         
         
@@ -35,10 +35,10 @@ struct BadgeImage: View {
                                                brightness: 0.25), location: 1.0),
                     ]), startPoint: .leading, endPoint: .trailing)
                 .mask(
+                    
                     Image("\(badgeItem.shape)")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        
                         
                 )
                 
@@ -57,6 +57,7 @@ struct BadgeImage: View {
                     
             )
             .frame(width:size,height: size)
+        
         
           
                 

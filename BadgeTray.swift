@@ -9,36 +9,80 @@ import SwiftUI
 
 struct BadgeTray: View {
     
+    @AppStorage("badgeTutorialDone") var badgeTutorialDone : Bool = false // Take this to an environmentObject later on
+    @State var badgeTutorialDoneOnAppear: Bool = false
     @State var triangleClicked = false
     @State var goldClicked = false
     @State var rubyClicked = false
     @EnvironmentObject var badge: BadgeViewModel
-    
+   
     var body: some View {
         
         ZStack{
             
-            Color(hue: 0, saturation: 0, brightness: 0.07) // Replace this with Color(hex: "121212)
-                .ignoresSafeArea()
-            
-            ScrollView(showsIndicators: false){
-            ZStack(alignment: .top){
+            ZStack{
                 
-                BadgeBackground()
+                Color(hue: 0, saturation: 0, brightness: 0.07) // Replace this with Color(hex: "121212)
+                    .ignoresSafeArea()
                 
-                VStack(spacing: 0){
-                    
-                    TrayHeading()
-                    MainBadge()
-                    CurrentBadgeSubHeading()
-                    BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked,rubyClicked: $rubyClicked)
+                ScrollView(showsIndicators: false){
+                    ZStack(alignment: .top){
+                        
+                        BadgeBackground()
+                        
+                        VStack(spacing: 0){
+                            
+                            TrayHeading()
+                            MainBadge()
+                            CurrentBadgeSubHeading()
+                            BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked,rubyClicked: $rubyClicked)
+                        }
+                    }
                 }
+            }.overlay(
+                
+                Button(action: {
+                    badge.sheetPresented = false
+                }){
+                    Image(systemName: "xmark")
+                        .foregroundColor(.black.opacity(0.65))
+                        .font(.system(size: 16,weight: .light ,design: .rounded))
+                        .padding(12)
+                        .background(
+                            Circle()
+                                .foregroundColor(Color.black.opacity(0.1))
+                        )
+                }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .padding(.top, 16)
+                    .padding(.trailing,16))
+            .overlay(
+                
+                Color.black.opacity((triangleClicked || goldClicked || rubyClicked) ? 0.5 : 0)
+                    .onTapGesture {
+                        triangleClicked = false
+                        goldClicked = false
+                        rubyClicked = false
+                    }
+                
+            )
+            .overlay(goldClicked ? BadgeEarnedPopup(goldClicked: $goldClicked) : nil)
+            .overlay(rubyClicked ? ProgressLostPopup(rubyClicked: $rubyClicked) : nil)
+            
+            if badgeTutorialDoneOnAppear == false{
+                
+                BadgeIntroPopup(badgeTutorialDoneOnAppear: $badgeTutorialDoneOnAppear)
+                    .zIndex(1)
+                    .transition(.move(edge: .bottom))
             }
+            
         }
+        .onAppear{
+            if badgeTutorialDone == true{
+                badgeTutorialDoneOnAppear = true
+            }
+            badge.currentBadgeStatus()
         }
-        .overlay(triangleClicked ? BadgeIntroPopup(triangleClicked: $triangleClicked) : nil)
-        .overlay(goldClicked ? BadgeEarnedPopup(goldClicked: $goldClicked) : nil)
-        .overlay(rubyClicked ? ProgressLostPopup(rubyClicked: $rubyClicked) : nil)
             
     }
 }
@@ -84,7 +128,8 @@ struct TrayHeading: View{
             
         }
         .foregroundColor(.black)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, minHeight: 40.0)
+        
         .padding(.top, 16)
            
     }
