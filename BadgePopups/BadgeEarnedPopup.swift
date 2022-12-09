@@ -25,6 +25,7 @@ struct BadgeEarnedPopup: View {
                     Text("Sleep 7-9 hours")
                         .font(.custom("Montserrat-Medium", size: 12))
                         .foregroundColor(.white)
+                    
                     Button(action: {
                         goldClicked.toggle()
                     }){

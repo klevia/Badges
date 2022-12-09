@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 
 class BadgeViewModel: ObservableObject{
-    
-    let statuses: [Int] = [1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+   
+    @Published var statuses: [Int] = [1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     @Published var currentBadgesStatus: [BadgeObject] = badges
+    @Published var currentHabit: String = ""
+    @Published var sheetPresented: Bool = false
     
     func currentBadgeStatus(){
         
@@ -27,6 +29,7 @@ class BadgeViewModel: ObservableObject{
                 
                 if currentBadgesStatus[lockedBadgeIndex].statusCount == currentBadgesStatus[lockedBadgeIndex].toAchieveRepetition{
                     currentBadgesStatus[lockedBadgeIndex].badgeAchieved = true
+                    //Add badge achieved timestamp
                 }
                 
             } else if (status == -2){
@@ -81,7 +84,7 @@ class BadgeViewModel: ObservableObject{
             
         }
         
-        return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0]
+        return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0] // This returns false when all badges become full
     }
     
     func formattedDate(badgeAchievedDate: Date) -> String{
