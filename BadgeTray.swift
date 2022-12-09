@@ -80,6 +80,8 @@ struct BadgeTray: View {
         .onAppear{
             if badgeTutorialDone == true{
                 badgeTutorialDoneOnAppear = true
+            } else{
+                badgeTutorialDone = true
             }
             badge.currentBadgeStatus()
         }

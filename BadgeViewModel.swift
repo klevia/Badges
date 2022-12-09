@@ -10,7 +10,7 @@ import SwiftUI
 
 class BadgeViewModel: ObservableObject{
    
-    @Published var statuses: [Int] = [1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    @Published var statuses: [Int] = [1,1,1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     @Published var currentBadgesStatus: [BadgeObject] = badges
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false

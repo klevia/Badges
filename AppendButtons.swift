@@ -13,8 +13,10 @@ struct DoneButton: View{
     @Binding var foregroundText: String
     @Binding var color: Color
     @EnvironmentObject var badge: BadgeViewModel
-    
+    @AppStorage("badgeTutorialDone") var badgeTutorialDone : Bool = false
     var body: some View{
+        
+        
         
         Button(action:{
             
@@ -25,6 +27,14 @@ struct DoneButton: View{
                         
                         badge.sheetPresented = true
                         //Badge earned Popup
+                        
+                    }
+                }
+                if !badgeTutorialDone{
+                    
+                    withAnimation(){
+                        
+                        badge.sheetPresented = true
                         
                     }
                 }
@@ -47,6 +57,7 @@ struct MissedButton: View{
     @Binding var foregroundText: String
     @Binding var color: Color
     @EnvironmentObject var badge: BadgeViewModel
+    @AppStorage("badgeTutorialDone") var badgeTutorialDone : Bool = false
     
     var body: some View{
         
@@ -66,6 +77,15 @@ struct MissedButton: View{
                     
                     //Lottie animation
                 }
+                if !badgeTutorialDone{
+                    
+                    withAnimation(){
+                        
+                        badge.sheetPresented = true
+                        
+                    }
+                }
+
                 badge.statuses.append(-2)
                
             }

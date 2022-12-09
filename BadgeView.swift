@@ -25,7 +25,7 @@ struct BadgeView: View {
                     withAnimation(){
                         badge.sheetPresented = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                            badgeTutorialDone = true
+                            //badgeTutorialDone = true
                         }
                     }
                 }){
