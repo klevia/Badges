@@ -14,6 +14,7 @@ class BadgeViewModel: ObservableObject{
     @Published var currentBadgesStatus: [BadgeObject] = badges
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
+    @Published var heartLost : Bool = false
     
     func currentBadgeStatus(){
         
@@ -28,8 +29,10 @@ class BadgeViewModel: ObservableObject{
                 currentBadgesStatus[lockedBadgeIndex].statusCount += 1
                 
                 if currentBadgesStatus[lockedBadgeIndex].statusCount == currentBadgesStatus[lockedBadgeIndex].toAchieveRepetition{
+                    
                     currentBadgesStatus[lockedBadgeIndex].badgeAchieved = true
-                    //Add badge achieved timestamp
+                    currentBadgesStatus[lockedBadgeIndex].badgeAchievedDate = Date()
+           
                 }
                 
             } else if (status == -2){
@@ -45,6 +48,16 @@ class BadgeViewModel: ObservableObject{
                     
                 }
                 
+            } else if (status == 0){
+                if currentBadgesStatus[lockedBadgeIndex].livesLeft == 0{
+                    
+                    currentBadgesStatus[lockedBadgeIndex].statusCount = 0
+                    currentBadgesStatus[lockedBadgeIndex].livesLeft = currentBadgesStatus[lockedBadgeIndex].lives
+                    currentBadgesStatus[lockedBadgeIndex].progressLostInBackground = Date()
+                    
+                }else{
+                    currentBadgesStatus[lockedBadgeIndex].livesLeft -= 1
+                }
             }
             
         }
@@ -96,4 +109,11 @@ class BadgeViewModel: ObservableObject{
         return returnString
         
     }
+    
+
+    
+    
+    
+    
+    
 }

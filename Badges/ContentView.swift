@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var badge: BadgeViewModel = BadgeViewModel()
+   
+
+ 
+    
     var body: some View {
         
         ZStack{
@@ -18,11 +22,14 @@ struct ContentView: View {
                 
                 DoneButton(appendNumber: .constant(1), foregroundText: .constant("+1%"), color: .constant(.green))
                 BadgeView()
+                InactivityButton(appendNumber: .constant(0), foregroundText: .constant("0%"), color: .constant(.blue))
                 MissedButton(appendNumber: .constant(-2), foregroundText: .constant("-1%"), color: .constant(.red))
                 
             }
         }
         .environmentObject(badge)
+
+       
         
     }
 }

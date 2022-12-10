@@ -9,31 +9,60 @@ import SwiftUI
 import Lottie
  
 struct LottieView: UIViewRepresentable {
+
+    let isPlay: Bool
     let lottieFile: String
  
     let animationView = LottieAnimationView()
  
-    func makeUIView(context: Context) -> some UIView {
+   // func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
         
         animationView.animation = Animation.named(lottieFile)
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .loop
+        animationView.loopMode = .playOnce
         animationView.animationSpeed = 1
-        animationView.play()
+      //  animationView.play()
+        
  
         view.addSubview(animationView)
  
         animationView.translatesAutoresizingMaskIntoConstraints = false
-        animationView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        animationView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
- 
+        
+        NSLayoutConstraint.activate([
+        animationView.heightAnchor.constraint(equalTo: view.heightAnchor),//.isActive = true
+        animationView.widthAnchor.constraint(equalTo: view.widthAnchor)//.isActive = true
+        ])
         return view
     }
  
-    func updateUIView(_ uiView: UIViewType, context: Context) {
+  //  func updateUIView(_ uiView: UIViewType, context: Context) {
  
-    }
+  //  }
+    
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
+           if isPlay {
+               context.coordinator.parent.animationView.play()
+           } else {
+               context.coordinator.parent.animationView.stop()
+
+           }
+       }
+
+       func makeCoordinator() -> Coordinator {
+           Coordinator(self)
+       }
+
+       class Coordinator: NSObject {
+           var parent: LottieView
+
+           init(_ parent: LottieView) {
+               self.parent = parent
+           }
+       }
+    
+    
 }
 
 
