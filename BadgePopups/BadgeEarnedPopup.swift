@@ -1,33 +1,38 @@
-//
-//  BadgeEarnedPopup.swift
-//  Badges
-//
-//  Created by Rishabh Maini on 04/12/22.
-//
+
 
 import SwiftUI
 
 struct BadgeEarnedPopup: View {
     
-    @Binding var goldClicked : Bool
     @EnvironmentObject var badge: BadgeViewModel
+    @State var fullScale: Bool = false
+    @State var showBadge: Bool = false
+    @State var showText: Bool = false
+    @State var showButton: Bool = false
+    @State var opacity: Double = 0.2
+    
     
     var body: some View {
         
         let achievedBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == true})!
         let substring = String(achievedBadge.endRepetition.dropLast(2))
         
-        
-        VStack(){
+        VStack{
+            
             VStack(spacing: 4){
                 
-                ZStack(){
+                ZStack{
+                    
                     Text("Sleep 7-9 hours")
                         .font(.custom("Montserrat-Medium", size: 12))
                         .foregroundColor(.white)
                     
                     Button(action: {
-                        goldClicked.toggle()
+                        
+                        withAnimation(){
+                            badge.badgeEarnedPopup = false
+                        }
+                        
                     }){
                         Image(systemName: "xmark")
                             .foregroundColor(Color(.white))
@@ -43,30 +48,41 @@ struct BadgeEarnedPopup: View {
                     .frame(maxWidth: .infinity,alignment: .trailing)
                     .padding(.trailing,16)
                 
- 
                 }
                 .padding(.bottom,15)
              
                 Image("\(achievedBadge.shape)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .shadow(color: Color(hue: achievedBadge.midColor.hue, saturation: achievedBadge.midColor.saturation, brightness: achievedBadge.midColor.brightness).opacity(showBadge ? 0.75 : 0), radius: 4)
+                    .shadow(color: Color.black.opacity(0.2), radius: 12, y: showBadge ? 16 : 0)
                     .frame(width: 150, height: 150, alignment: .center)
-                    .shadow(color: Color(hue: achievedBadge.midColor.hue, saturation: achievedBadge.midColor.saturation, brightness: achievedBadge.midColor.brightness), radius: 30)
+                   
+                    .opacity(showBadge ? 1 : 0)
+                    .offset(y: showBadge ? 0 : 48)
                 
-                Text("\(substring) repetitions complete")
-                    .font(.custom("Montserrat-Medium", size: 20))
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding(.top,19)
-                
-                Text("\(badge.formattedDate(badgeAchievedDate: achievedBadge.badgeAchievedDate))")
-                    .font(.custom("Montserrat-Medium", size: 14))
-                    .foregroundColor(.white).opacity(0.5)
-                    .padding(.horizontal,32)
-                    .padding(.bottom,35)
+                VStack(spacing: 4){
+                    //Text("\(substring) repetitions complete")
+                    Text("\(achievedBadge.shape) badge achieved")
+                        .font(.custom("Montserrat-Medium", size: 20))
+                        .foregroundColor(.white)
+                        .padding(.top,19)
+                        .opacity(showText ? 1 : 0)
+                        .offset(y: showText ? 0 : 32)
+                    
+                     Text("\(badge.formattedDate(badgeAchievedDate: achievedBadge.badgeAchievedDate))")
+                        .font(.custom("Montserrat-Medium", size: 14))
+                        .foregroundColor(.white).opacity(0.5)
+                        .padding(.horizontal,32)
+                        .padding(.bottom,35)
+                        .opacity(showText ? 1 : 0)
+                        .offset(y: showText ? 0 : 32)
+                       
+                }
+               
                 
                 Button(action: {
-                    goldClicked.toggle()
+                    
                 }){
                     Text("Tell a friend")
                         .font(.custom("Montserrat-Medium", size: 16))
@@ -77,6 +93,8 @@ struct BadgeEarnedPopup: View {
                             .foregroundColor(.white))
                        
                 }
+                .opacity(showButton ? 1 : 0)
+                .offset(y: showButton ? 0 : 16)
             
             }
         }
@@ -85,16 +103,62 @@ struct BadgeEarnedPopup: View {
         .frame(maxWidth: .infinity)
         .background(
             
-              //  RoundedRectangle(cornerRadius: 24)
-                //    .foregroundColor(Color.black.opacity(0.9))
+            ZStack{
+                
+                Color.black
                 Image("\(achievedBadge.shape)Background")
                     .resizable()
-                    .cornerRadius(24)
-           
+                    .mask(
+                        
+                        LinearGradient(gradient: Gradient(stops: [
+                            Gradient.Stop(color: .white.opacity(1), location: 0),
+                            
+                            Gradient.Stop(color: .white.opacity(0.2), location: 1)
+                        ]), startPoint: .top, endPoint: .bottom)
+                        .opacity(opacity)
+                    )
+            }
+            .cornerRadius(34)
                
-            )
-        .padding(.horizontal,16)
+        )
+        
+        .padding(.horizontal,24)
+    
+        .onAppear{
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                
+                withAnimation(.easeOut(duration: 2)){
+                    
+                    for index in 0...20{
+                        
+                        opacity += 0.04
+                        
+                    }
+                    
+                    showBadge = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                    withAnimation(.easeOut(duration: 1)){
+                        showText = true
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                    withAnimation(.easeOut(duration: 0.5)){
+                        showButton = true
+                    }
+                }
+
+            }
+        }
     }
     
 }
 
+struct BadgeEarnedPopup_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        BadgeEarnedPopup()
+           
+    }
+}

@@ -15,6 +15,7 @@ struct BadgeTray: View {
     @State var goldClicked = false
     @State var rubyClicked = false
     @EnvironmentObject var badge: BadgeViewModel
+    @State var playConfetti: Bool = false
    
     var body: some View {
         
@@ -58,15 +59,19 @@ struct BadgeTray: View {
                     .padding(.trailing,16))
             .overlay(
                 
-                Color.black.opacity((triangleClicked || goldClicked || rubyClicked) ? 0.5 : 0)
+                Color.black.opacity((badge.badgeEarnedPopup || rubyClicked) ? 0.5 : 0)
+                    
                     .onTapGesture {
-                        triangleClicked = false
-                        goldClicked = false
+                        
+                        withAnimation(){
+                            badge.badgeEarnedPopup = false
+                        }
                         rubyClicked = false
                     }
                 
             )
-            .overlay(goldClicked ? BadgeEarnedPopup(goldClicked: $goldClicked) : nil)
+            
+            .overlay(badge.badgeEarnedPopup ? BadgeEarnedPopup() : nil)
             .overlay(rubyClicked ? ProgressLostPopup(rubyClicked: $rubyClicked) : nil)
             
             if badgeTutorialDoneOnAppear == false{
@@ -76,14 +81,25 @@ struct BadgeTray: View {
                     .transition(.move(edge: .bottom))
             }
             
+            //if playConfetti{
+                
+                    
+           // }
+                
+            
         }
         .onAppear{
+            
+           // DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            //}
+            badge.currentBadgeStatus()
+            
             if badgeTutorialDone == true{
                 badgeTutorialDoneOnAppear = true
             } else{
                 badgeTutorialDone = true
             }
-            badge.currentBadgeStatus()
+            
         }
             
     }
@@ -252,6 +268,7 @@ struct BadgeCell: View{
                 Text(badgeItem.badgeAchieved ?
                      "\(badge.formattedDate(badgeAchievedDate: badgeItem.badgeAchievedDate))" :
                         "\(badgeItem.beginRepetition) - \(badgeItem.endRepetition) repetition")
+                .lineLimit(1)
                 .font(.custom("Montserrat-Regular", size: 14))
                 .foregroundColor(.white)
                 .opacity(0.5)

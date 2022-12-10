@@ -23,18 +23,20 @@ struct DoneButton: View{
             withAnimation(){
                 badge.statuses.append(1)
                 if badge.minimizedBadge().statusCount == 0{
-                    withAnimation(){
+                   
                         
                         badge.sheetPresented = true
-                        //Badge earned Popup
-                        
-                    }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                            badge.badgeEarnedPopup = true
+                        }
+                     
                 }
                 if !badgeTutorialDone{
                     
                     withAnimation(){
                         
                         badge.sheetPresented = true
+                        //This could also be in an onChange of swipeArray
                         
                     }
                 }
@@ -82,7 +84,7 @@ struct MissedButton: View{
                     withAnimation(){
                         
                         badge.sheetPresented = true
-                        
+                        //This could also be in an onChange of swipeArray
                     }
                 }
 

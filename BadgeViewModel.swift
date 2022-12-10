@@ -14,6 +14,7 @@ class BadgeViewModel: ObservableObject{
     @Published var currentBadgesStatus: [BadgeObject] = badges
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
+    @Published var badgeEarnedPopup: Bool = false
     
     func currentBadgeStatus(){
         
@@ -90,7 +91,7 @@ class BadgeViewModel: ObservableObject{
     func formattedDate(badgeAchievedDate: Date) -> String{
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .medium
         
         let returnString = "Earned on \(dateFormatter.string(from: badgeAchievedDate))"
         return returnString
