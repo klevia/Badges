@@ -78,7 +78,7 @@ struct Popup: View{
     var body: some View{
         
         HStack(spacing: 0){
-            LottieView(lottieFile: "Heart break")
+            LottieView(lottieFile: "HeartBreak")
                 .frame(width: 32, height: 32)
                 .zIndex(1)
             Text("\(livesLeftTemp)")
