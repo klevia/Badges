@@ -20,6 +20,7 @@
 		497BD69029422C850041E3DA /* BadgeIntroPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD68F29422C850041E3DA /* BadgeIntroPopup.swift */; };
 		497BD6922943680E0041E3DA /* AppendButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD6912943680E0041E3DA /* AppendButtons.swift */; };
 		497BD6942943BCB00041E3DA /* BadgeEarnedPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BD6932943BCB00041E3DA /* BadgeEarnedPopup.swift */; };
+		49F938D929450A6900448E2F /* HeartBreak.json in Resources */ = {isa = PBXBuildFile; fileRef = 49F938D829450A6900448E2F /* HeartBreak.json */; };
 		8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553D2938FDD4001792F6 /* BadgesApp.swift */; };
 		814155402938FDD4001792F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141553F2938FDD4001792F6 /* ContentView.swift */; };
 		814155422938FDD5001792F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814155412938FDD5001792F6 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		497BD68F29422C850041E3DA /* BadgeIntroPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeIntroPopup.swift; sourceTree = "<group>"; };
 		497BD6912943680E0041E3DA /* AppendButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendButtons.swift; sourceTree = "<group>"; };
 		497BD6932943BCB00041E3DA /* BadgeEarnedPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeEarnedPopup.swift; sourceTree = "<group>"; };
+		49F938D829450A6900448E2F /* HeartBreak.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HeartBreak.json; sourceTree = "<group>"; };
 		8141553A2938FDD4001792F6 /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8141553D2938FDD4001792F6 /* BadgesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesApp.swift; sourceTree = "<group>"; };
 		8141553F2938FDD4001792F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				4924EDA0293BBBAF00A42185 /* BadgeModel.swift */,
 				497BD678293CEE080041E3DA /* HeartGradient.swift */,
 				497BD68A2942005D0041E3DA /* LottieView.swift */,
+				49F938D829450A6900448E2F /* HeartBreak.json */,
 				8141553C2938FDD4001792F6 /* Badges */,
 				8141553B2938FDD4001792F6 /* Products */,
 			);
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				814155452938FDD5001792F6 /* Preview Assets.xcassets in Resources */,
+				49F938D929450A6900448E2F /* HeartBreak.json in Resources */,
 				814155422938FDD5001792F6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

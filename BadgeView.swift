@@ -93,7 +93,7 @@ struct Popup: View{
         ZStack{
             HStack(spacing: 0){
                 // if(badge.heartLost){
-                LottieView(isPlay: isPlay, lottieFile: "Heart break")
+                LottieView(isPlay: isPlay, lottieFile: "HeartBreak")
                     .frame(width: 32, height: 32)
                     .zIndex(1)
                 //   .opacity(badge.heartLost ? 1 : 1)
