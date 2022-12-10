@@ -224,7 +224,8 @@ struct BadgeTrayList: View{
                     
                     if badgeItem.badgeAchieved{
                         print("Active")
-                        rubyClicked.toggle()
+                        print(badge.currentBadgesStatus)
+                        triangleClicked.toggle()
                     } else {
                         
                         

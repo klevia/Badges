@@ -13,20 +13,41 @@ struct ProgressLostPopup: View {
     @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View {
-        let lostBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == false})! //to be changed
+        let lostBadge = badges[3]
+        //badge.currentBadgesStatus.last(where: {$0.badgeAchieved == false})! //to be changed
         
         VStack{
-            VStack(spacing: 1){
+            VStack(spacing: 4){
                 
+                ZStack(){
                     Text("Sleep 7-9 hours")
-                        .font(.custom("Montserrat-Medium", size: 12))
+                        .font(.custom("Montserrat-Medium", size: 14))
                         .foregroundColor(.white)
-                        .padding(.bottom,39)
+                    Button(action: {
+                        rubyClicked.toggle()
+                    }){
+                        Image(systemName: "xmark")
+                            .foregroundColor(Color(.white).opacity(0))
+                            .font(.system(size: 16,weight: .light ,design: .rounded))
+                            .padding(12)
+                            .background(
+                                Circle()
+                                    .foregroundColor(Color.white.opacity(0))
+                            )
+                          
+                            
+                    }
+                    .frame(maxWidth: .infinity,alignment: .trailing)
+                  
+                
+ 
+                }
+                .padding(.bottom,28)
                     
                     Image("BrokenHeart")
                         .resizable()
                         .aspectRatio( contentMode: .fit)
-                        .frame(width: 98, height: 80,alignment: .center)
+                        .frame(width: 105, height: 105,alignment: .center)
                         .opacity(0)
                         .background(
                             
@@ -53,36 +74,48 @@ struct ProgressLostPopup: View {
                         )
                 
                 Text("You ran out of misses")
-                    .font(.system(size: 20))
+                    .font(.custom("Montserrat-Medium", size: 20))
+                    .bold()
                     .foregroundColor(.white)
                     .padding(.top, 23)
                 
-                Text("On route 21st - 45th repetition, you missed the habit more than 4 times. Let's start again and stronger this time")
+                Text("On route of achiving the \(lostBadge.shape) Badge, you missed the habit more than \(lostBadge.lives) times. Let's start again and stronger this time")
                     .multilineTextAlignment(.center)
-                    .font(.system(size: 14))
+                    .font(.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(.white).opacity(0.5)
-                    .padding(.horizontal,32)
-                    .padding(.bottom,30)
+                    .padding(.horizontal,16)
+                    .padding(.bottom,24)
                 
-                Button(action: {
+              Button(action: {
                     rubyClicked.toggle()
                 }){
                     Text("Close")
+                        .font(.custom("Montserrat-Medium", size: 16))
                         .foregroundColor(Color.black)
+                        .padding()
+                        .padding(.horizontal,16)
                         .background(Capsule()
-                            .foregroundColor(.white)
-                            .frame(width: 133,height: 50))
-                        .padding(.bottom,16)
+                            .foregroundColor(.white))
                 }
             }
         }
-       
-        .padding(.vertical,32)
-   
+        .padding()
+        .padding(.bottom,8)
         .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: 24)
-            .fill(Color(hue: 0.5611, saturation: 1, brightness: 0.15)))
-        .padding(.horizontal,16)
+        .background(
+            Image("\(lostBadge.shape)Background")
+                .resizable()
+                .mask(
+                    
+                    LinearGradient(gradient: Gradient(stops: [
+                        Gradient.Stop(color: .white.opacity(0.45), location: 0),
+                        Gradient.Stop(color: .white.opacity(0.3), location: 1)
+                    ]), startPoint: .top, endPoint: .bottom)
+                )
+                .background(Color.black)
+                .cornerRadius(24)
+        )
+        .padding(.horizontal,24)
     }
     
 }
