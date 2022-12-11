@@ -11,6 +11,7 @@ import SwiftUI
 class BadgeViewModel: ObservableObject{
    
     @Published var currentBadgesStatus: [BadgeObject] = badges
+    @Published var statuses : [HabitArray] = habitEntries
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
     @Published var heartLost : Bool = false
@@ -19,11 +20,35 @@ class BadgeViewModel: ObservableObject{
     @AppStorage("badgeProgressLostPopupLastSeen") var badgeProgressLostPopupLastSeen : Date = Date.distantPast
     
     
+    
+    func progressLostInBackground(){
+        
+        currentBadgesStatus = badges
+        
+        let lockedBadgeIndex = currentBadgesStatus.filter({$0.badgeAchieved == false})[0].index
+        
+        if !(badgeProgressLostPopupLastSeen > currentBadgesStatus[lockedBadgeIndex].progressLostInBackground){
+            currentBadgesStatus[lockedBadgeIndex].redDotOnBadgeDueToInactivity = true
+            
+            var filteredArray : [HabitArray] = []
+            
+            filteredArray =  statuses.filter({$0.timeStamp > currentBadgesStatus[lockedBadgeIndex].progressLostInBackground})
+            
+            //check if the habit was swiped after inactivity in background
+            if !(filteredArray.filter({$0.status != 0 }).count > 0) {
+                //brokenHearts
+                //Popup
+            }
+        }
+    }
+    
+    
     func currentBadgeStatus(){
         
         currentBadgesStatus = badges
         
-        for habitEntry in habitEntries{
+        
+        for habitEntry in statuses{
             
             let lockedBadgeIndex = currentBadgesStatus.filter({$0.badgeAchieved == false})[0].index
             
@@ -73,8 +98,8 @@ class BadgeViewModel: ObservableObject{
         
         var currentBadgesStatusMB = badges
         
-        for habitEntry in habitEntries{
-            
+        for habitEntry in statuses{
+        
             let lockedBadgeIndex = currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0].index
             
             if habitEntry.status == 1{
@@ -104,7 +129,7 @@ class BadgeViewModel: ObservableObject{
                     
                     currentBadgesStatusMB[lockedBadgeIndex].statusCount = 0
                     currentBadgesStatusMB[lockedBadgeIndex].livesLeft = currentBadgesStatusMB[lockedBadgeIndex].lives
-                    currentBadgesStatusMB[lockedBadgeIndex].progressLostInBackground = Date()
+                    currentBadgesStatusMB[lockedBadgeIndex].progressLostInBackground = habitEntry.timeStamp
                     
                 }else{
                     
@@ -113,7 +138,7 @@ class BadgeViewModel: ObservableObject{
             }
             
         }
-        print(currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0].statusCount)
+        print(currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0].progressLostInBackground)
         return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0] 
     }
     
