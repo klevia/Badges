@@ -69,10 +69,10 @@ struct CurrentBadge: View{
    // @Binding var livesLeftTemp: Int
     var body: some View{
         
-        let minimizedBadge: BadgeObject = badge.minimizedBadge()
+        
        
         HStack(spacing: 2){
-            BadgeImage(badgeItem: .constant(minimizedBadge), size: .constant(40))
+            BadgeImage(size: .constant(40))
            
           // if badge.heartLost{
               //  Popup(livesLeftTemp: $livesLeftTemp)

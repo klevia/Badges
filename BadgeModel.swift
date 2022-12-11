@@ -12,6 +12,12 @@ func date(year: Int, month: Int, day: Int) -> Date{
     Calendar.current.date(from: .init(year: year, month: month, day: day)) ?? Date()
 }
 
+extension Date{
+    func addDay(day: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: day, to: self) ?? Date()
+    }
+}
+
 struct BadgeObject: Identifiable{
     
     var id = UUID()
@@ -45,6 +51,7 @@ struct HabitArray : Codable {
 
 
 var habitEntries : [HabitArray] = [
+    
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 11, day: 21)),
     HabitArray(status: -2, timeStamp: date(year: 2022, month: 11, day: 22)),
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 11, day: 23)),
@@ -64,7 +71,7 @@ var habitEntries : [HabitArray] = [
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 07)),
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 08)),
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 09)),
-    HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 10)),
+    HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 10))
     
 ]
 

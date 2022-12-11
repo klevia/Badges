@@ -9,11 +9,14 @@ import SwiftUI
 
 struct BadgeImage: View {
     
-    @Binding var badgeItem: BadgeObject
+    //@Binding var badgeItemIndex: BadgeObject
     @Binding var size: CGFloat
     @State var filledImage: Bool = false
+    @EnvironmentObject var badge: BadgeViewModel
+    
     var body: some View {
         
+        var badgeItem = badge.minimizedBadge()
         
         Image("\(badgeItem.shape)")
             .renderingMode(.template)
@@ -51,7 +54,7 @@ struct BadgeImage: View {
                     .aspectRatio(contentMode: .fit)
                     .mask(
                         Color.white.opacity(1)
-                        .frame(height: CGFloat((Double(badgeItem.statusCount)/Double(badgeItem.toAchieveRepetition)))*size)
+                        .frame(height: CGFloat((Double(badge.minimizedBadge().statusCount)/Double(badgeItem.toAchieveRepetition)))*size)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                     )
                     

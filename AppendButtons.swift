@@ -21,14 +21,9 @@ struct DoneButton: View{
         Button(action:{
             
             withAnimation(){
-                habitEntries.map({$0.status})
                
-                if (badge.heartLost) {
-                    badge.heartLost = false
-                }
-             
+                habitEntries.append(HabitArray(status: 1, timeStamp: Date(rawValue: (habitEntries.last?.timeStamp.addDay(day: 1))!.rawValue) ?? Date()))
                 
-                badge.statuses.append(1)
                 if badge.minimizedBadge().statusCount == 0{
                    
                         badge.sheetPresented = true
@@ -104,7 +99,7 @@ struct MissedButton: View{
                     }
                 }
 
-                badge.statuses.append(-2)
+            habitEntries.append(HabitArray(status: -2, timeStamp: Date(rawValue: (habitEntries.last?.timeStamp.addDay(day: 1))!.rawValue) ?? Date()))
                
             
             
@@ -148,8 +143,7 @@ struct InactivityButton: View{
            
             print(badge.minimizedBadge().progressLostInBackground)
 
-                badge.statuses.append(0)
-
+                
             
         }){
             

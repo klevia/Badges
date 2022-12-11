@@ -154,7 +154,7 @@ struct MainBadge: View{ //We should replace this with current badge struct
         
         let currentBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
-        BadgeImage(badgeItem: .constant(currentBadge), size: .constant(128))
+        BadgeImage(size: .constant(128))
             .padding(.top, 56)
             .padding(.bottom, 32)
         
@@ -245,7 +245,7 @@ struct BadgeCell: View{
         
         HStack(spacing: 0){
             
-            BadgeImage(badgeItem: .constant(badgeItem), size: .constant(64))
+            BadgeImage(size: .constant(64))
                 .shadow(color: Color(hue: badgeItem.midColor.hue, saturation: badgeItem.midColor.saturation, brightness: badgeItem.midColor.brightness).opacity(badgeItem.badgeAchieved ? 0.5 : 0), radius: 4)
                 .padding(.vertical, 4)
                 .padding(.horizontal, 16)

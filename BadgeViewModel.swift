@@ -10,7 +10,6 @@ import SwiftUI
 
 class BadgeViewModel: ObservableObject{
    
-    @Published var statuses: [Int] = habitEntries.map({$0.status})  //[1,1,1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     @Published var currentBadgesStatus: [BadgeObject] = badges
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
@@ -24,11 +23,11 @@ class BadgeViewModel: ObservableObject{
         
         currentBadgesStatus = badges
         
-        for status in statuses{
+        for habitEntry in habitEntries{
             
             let lockedBadgeIndex = currentBadgesStatus.filter({$0.badgeAchieved == false})[0].index
             
-            if status == 1{
+            if habitEntry.status == 1{
                 
                 currentBadgesStatus[lockedBadgeIndex].statusCount += 1
                 
@@ -39,7 +38,7 @@ class BadgeViewModel: ObservableObject{
            
                 }
                 
-            } else if (status == -2){
+            } else if (habitEntry.status == -2){
                 
                 if currentBadgesStatus[lockedBadgeIndex].livesLeft == 0{
                     
@@ -52,14 +51,16 @@ class BadgeViewModel: ObservableObject{
                     
                 }
                 
-            } else if (status == 0){
+            } else if (habitEntry.status == 0){
+                
                 if currentBadgesStatus[lockedBadgeIndex].livesLeft == 0{
                     
                     currentBadgesStatus[lockedBadgeIndex].statusCount = 0
                     currentBadgesStatus[lockedBadgeIndex].livesLeft = currentBadgesStatus[lockedBadgeIndex].lives
-                    currentBadgesStatus[lockedBadgeIndex].progressLostInBackground = Date()
+                    currentBadgesStatus[lockedBadgeIndex].progressLostInBackground = habitEntry.timeStamp
                     
                 }else{
+                    
                     currentBadgesStatus[lockedBadgeIndex].livesLeft -= 1
                 }
             }
@@ -72,11 +73,11 @@ class BadgeViewModel: ObservableObject{
         
         var currentBadgesStatusMB = badges
         
-        for status in statuses{
+        for habitEntry in habitEntries{
             
             let lockedBadgeIndex = currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0].index
             
-            if status == 1{
+            if habitEntry.status == 1{
                 
                 currentBadgesStatusMB[lockedBadgeIndex].statusCount += 1
                 
@@ -84,7 +85,7 @@ class BadgeViewModel: ObservableObject{
                     currentBadgesStatusMB[lockedBadgeIndex].badgeAchieved = true
                 }
                 
-            } else if (status == -2){
+            } else if (habitEntry.status == -2){
                 
                 if currentBadgesStatusMB[lockedBadgeIndex].livesLeft == 0{
                     
@@ -97,11 +98,23 @@ class BadgeViewModel: ObservableObject{
                     
                 }
                 
+            } else if (habitEntry.status == 0){
+                
+                if currentBadgesStatusMB[lockedBadgeIndex].livesLeft == 0{
+                    
+                    currentBadgesStatusMB[lockedBadgeIndex].statusCount = 0
+                    currentBadgesStatusMB[lockedBadgeIndex].livesLeft = currentBadgesStatusMB[lockedBadgeIndex].lives
+                    currentBadgesStatusMB[lockedBadgeIndex].progressLostInBackground = Date()
+                    
+                }else{
+                    
+                    currentBadgesStatusMB[lockedBadgeIndex].livesLeft -= 1
+                }
             }
             
         }
         
-        return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0] // This returns false when all badges become full
+        return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0] 
     }
     
     func dismissProgressLostPopUp(){
