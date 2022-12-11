@@ -21,6 +21,12 @@ struct DoneButton: View{
         Button(action:{
             
             withAnimation(){
+                habitEntries.map({$0.status})
+               
+                if (badge.heartLost) {
+                    badge.heartLost = false
+                }
+             
                 
                 badge.statuses.append(1)
                 if badge.minimizedBadge().statusCount == 0{

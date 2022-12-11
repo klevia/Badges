@@ -28,6 +28,7 @@
 		8141554C2938FF03001792F6 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141554B2938FF03001792F6 /* Star.swift */; };
 		8141554E2938FF2F001792F6 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8141554D2938FF2E001792F6 /* Polygon.swift */; };
 		8188A8AC293CF4350064B53A /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188A8AB293CF4350064B53A /* Color+Extension.swift */; };
+		8188A8AE2945D0790064B53A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188A8AD2945D0790064B53A /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		8141554B2938FF03001792F6 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		8141554D2938FF2E001792F6 /* Polygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polygon.swift; sourceTree = "<group>"; };
 		8188A8AB293CF4350064B53A /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Color+Extension.swift"; path = "../../Color+Extension.swift"; sourceTree = "<group>"; };
+		8188A8AD2945D0790064B53A /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				497BD67E293DF7130041E3DA /* BadgeImage.swift */,
 				497BD669293BC24A0041E3DA /* BadgeViewModel.swift */,
 				497BD667293BC1CD0041E3DA /* BadgeView.swift */,
+				8188A8AD2945D0790064B53A /* Data.swift */,
 				497BD6912943680E0041E3DA /* AppendButtons.swift */,
 				4924EDA0293BBBAF00A42185 /* BadgeModel.swift */,
 				497BD678293CEE080041E3DA /* HeartGradient.swift */,
@@ -216,6 +219,7 @@
 				8141554C2938FF03001792F6 /* Star.swift in Sources */,
 				497BD66C293C7D270041E3DA /* BadgeTray.swift in Sources */,
 				497BD67F293DF7130041E3DA /* BadgeImage.swift in Sources */,
+				8188A8AE2945D0790064B53A /* Data.swift in Sources */,
 				814155402938FDD4001792F6 /* ContentView.swift in Sources */,
 				8141553E2938FDD4001792F6 /* BadgesApp.swift in Sources */,
 				8188A8AC293CF4350064B53A /* Color+Extension.swift in Sources */,

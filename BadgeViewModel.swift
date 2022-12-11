@@ -10,7 +10,7 @@ import SwiftUI
 
 class BadgeViewModel: ObservableObject{
    
-    @Published var statuses: [Int] = [1,1,1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    @Published var statuses: [Int] = habitEntries.map({$0.status})  //[1,1,1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     @Published var currentBadgesStatus: [BadgeObject] = badges
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
@@ -18,6 +18,7 @@ class BadgeViewModel: ObservableObject{
     @Published var badgeEarnedPopup: Bool = false
     @Published var badgeProgressLostPopup: Bool = false
     @AppStorage("badgeProgressLostPopupLastSeen") var badgeProgressLostPopupLastSeen : Date = Date.distantPast
+    
     
     func currentBadgeStatus(){
         
@@ -121,6 +122,8 @@ class BadgeViewModel: ObservableObject{
         return returnString
         
     }
+    
+ 
     
 
     
