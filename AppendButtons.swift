@@ -22,7 +22,7 @@ struct DoneButton: View{
             
             withAnimation(){
                
-                habitEntries.append(HabitArray(status: 1, timeStamp: Date(rawValue: (habitEntries.last?.timeStamp.addDay(day: 1))!.rawValue) ?? Date()))
+                badge.statuses.append(HabitArray(status: 1, timeStamp: Date(rawValue: (habitEntries.last?.timeStamp.addDay(day: 1))!.rawValue) ?? Date()))
                 
                 if badge.minimizedBadge().statusCount == 0{
                    
@@ -99,7 +99,7 @@ struct MissedButton: View{
                     }
                 }
 
-            habitEntries.append(HabitArray(status: -2, timeStamp: Date(rawValue: (habitEntries.last?.timeStamp.addDay(day: 1))!.rawValue) ?? Date()))
+            badge.statuses.append(HabitArray(status: -2, timeStamp: Date(rawValue: (habitEntries.last?.timeStamp.addDay(day: 1))!.rawValue) ?? Date()))
                
             
             
