@@ -128,10 +128,6 @@ struct InactivityButton: View{
             withAnimation(){
                 
                 
-                if (badge.heartLost) {
-                    badge.heartLost = false
-                }
-                
                 if (badge.minimizedBadge().livesLeft == 0){
                     
                    // print(badge.minimizedBadge().progressLostInBackground)
