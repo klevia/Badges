@@ -11,7 +11,7 @@ struct BadgeIntroPopup: View {
     
     @State var presentPopover: Bool = true
     @AppStorage("badgeTutorialDone") var badgeTutorialDone : Bool = false
-    @Binding var badgeTutorialDoneOnAppear : Bool
+    //@Binding var badgeTutorialDoneOnAppear : Bool
     
     var body: some View {
        
@@ -56,7 +56,7 @@ struct BadgeIntroPopup: View {
                         Button(action:{
                             
                             withAnimation(){
-                                badgeTutorialDoneOnAppear = true
+                                badgeTutorialDone = true
                             }
                         }){
                             

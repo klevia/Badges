@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ProgressLostPopup: View {
     
-    @Binding var rubyClicked : Bool
     @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View {
-        let lostBadge = badges[3]
-        //badge.currentBadgesStatus.last(where: {$0.badgeAchieved == false})! //to be changed
+        
+        let lostBadge = badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})!
         
         VStack{
             VStack(spacing: 4){
@@ -23,8 +22,13 @@ struct ProgressLostPopup: View {
                     Text("Sleep 7-9 hours")
                         .font(.custom("Montserrat-Medium", size: 14))
                         .foregroundColor(.white)
+                   
                     Button(action: {
-                        rubyClicked.toggle()
+                        
+                        withAnimation(){
+                            badge.dismissProgressLostPopUp()
+                        }
+                        
                     }){
                         Image(systemName: "xmark")
                             .foregroundColor(Color(.white).opacity(0))
@@ -73,13 +77,14 @@ struct ProgressLostPopup: View {
                             
                         )
                 
-                Text("You ran out of misses")
+                Text("\(lostBadge.shape) badge progress lost")
                     .font(.custom("Montserrat-Medium", size: 20))
-                    .bold()
                     .foregroundColor(.white)
                     .padding(.top, 23)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
                 
-                Text("On route of achiving the \(lostBadge.shape) Badge, you missed the habit more than \(lostBadge.lives) times. Let's start again and stronger this time")
+                Text("You ran out of misses after missing the habit more than \(lostBadge.lives) times. Let's start again and stronger this time")
                     .multilineTextAlignment(.center)
                     .font(.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(.white).opacity(0.5)
@@ -87,7 +92,11 @@ struct ProgressLostPopup: View {
                     .padding(.bottom,24)
                 
               Button(action: {
-                    rubyClicked.toggle()
+                    
+                  withAnimation(){
+                      badge.dismissProgressLostPopUp()
+                  }
+                  
                 }){
                     Text("Close")
                         .font(.custom("Montserrat-Medium", size: 16))
@@ -113,9 +122,9 @@ struct ProgressLostPopup: View {
                     ]), startPoint: .top, endPoint: .bottom)
                 )
                 .background(Color.black)
-                .cornerRadius(24)
+                .cornerRadius(34)
         )
-        .padding(.horizontal,24)
+        .padding(.horizontal,34)
     }
     
 }

@@ -16,6 +16,8 @@ class BadgeViewModel: ObservableObject{
     @Published var sheetPresented: Bool = false
     @Published var heartLost : Bool = false
     @Published var badgeEarnedPopup: Bool = false
+    @Published var badgeProgressLostPopup: Bool = false
+    @AppStorage("badgeProgressLostPopupLastSeen") var badgeProgressLostPopupLastSeen : Date = Date.distantPast
     
     func currentBadgeStatus(){
         
@@ -99,6 +101,15 @@ class BadgeViewModel: ObservableObject{
         }
         
         return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0] // This returns false when all badges become full
+    }
+    
+    func dismissProgressLostPopUp(){
+        
+        if badgeProgressLostPopup{
+            badgeProgressLostPopup = false
+            badgeProgressLostPopupLastSeen = Date()
+            
+        }
     }
     
     func formattedDate(badgeAchievedDate: Date) -> String{

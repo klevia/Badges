@@ -13,7 +13,7 @@ struct BadgeTray: View {
     @State var badgeTutorialDoneOnAppear: Bool = false
     @State var triangleClicked = false
     @State var goldClicked = false
-    @State var rubyClicked = false
+    
     @EnvironmentObject var badge: BadgeViewModel
     @State var playConfetti: Bool = false
    
@@ -36,7 +36,7 @@ struct BadgeTray: View {
                             TrayHeading()
                             MainBadge()
                             CurrentBadgeSubHeading()
-                            BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked,rubyClicked: $rubyClicked)
+                            BadgeTrayList(triangleClicked: $triangleClicked, goldClicked: $goldClicked)
                         }
                     }
                 }
@@ -59,24 +59,25 @@ struct BadgeTray: View {
                     .padding(.trailing,16))
             .overlay(
                 
-                Color.black.opacity((badge.badgeEarnedPopup || rubyClicked) ? 0.5 : 0)
+                Color.black.opacity((badge.badgeEarnedPopup || badge.badgeProgressLostPopup) ? 0.5 : 0)
                     
                     .onTapGesture {
                         
                         withAnimation(){
                             badge.badgeEarnedPopup = false
+                            badge.dismissProgressLostPopUp()
                         }
-                        rubyClicked = false
+                        
                     }
                 
             )
             
             .overlay(badge.badgeEarnedPopup ? BadgeEarnedPopup() : nil)
-            .overlay(rubyClicked ? ProgressLostPopup(rubyClicked: $rubyClicked) : nil)
+            .overlay(badge.badgeProgressLostPopup ? ProgressLostPopup() : nil)
             
-            if badgeTutorialDoneOnAppear == false{
+            if !badgeTutorialDone{
                 
-                BadgeIntroPopup(badgeTutorialDoneOnAppear: $badgeTutorialDoneOnAppear)
+                BadgeIntroPopup()
                     .zIndex(1)
                     .transition(.move(edge: .bottom))
             }
@@ -89,17 +90,9 @@ struct BadgeTray: View {
             
         }
         .onAppear{
-            
-           // DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            //}
+           
             badge.currentBadgeStatus()
-            
-            if badgeTutorialDone == true{
-                badgeTutorialDoneOnAppear = true
-            } else{
-                badgeTutorialDone = true
-            }
-            
+          
         }
             
     }
@@ -210,8 +203,7 @@ struct BadgeTrayList: View{
     @EnvironmentObject var badge: BadgeViewModel
     @Binding var triangleClicked : Bool
     @Binding var goldClicked : Bool
-    @Binding var rubyClicked : Bool
-    
+   
     var body: some View{
         
         VStack(spacing: 16){
