@@ -10,12 +10,13 @@ import SwiftUI
 
 class BadgeViewModel: ObservableObject{
    
-    @Published var statuses: [Int] = [1,1,1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    @Published var statuses: [Int] = habitEntries.map({$0.status})  //[1,1,1,1]//[1,1,1,1,1,1,1,-2,-2,1,1,1,-2,-2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     @Published var currentBadgesStatus: [BadgeObject] = badges
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
     @Published var heartLost : Bool = false
     @Published var badgeEarnedPopup: Bool = false
+    
     
     func currentBadgeStatus(){
         
@@ -110,6 +111,8 @@ class BadgeViewModel: ObservableObject{
         return returnString
         
     }
+    
+ 
     
 
     

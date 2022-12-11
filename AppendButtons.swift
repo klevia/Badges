@@ -21,6 +21,7 @@ struct DoneButton: View{
         Button(action:{
             
             withAnimation(){
+                habitEntries.map({$0.status})
                
                 if (badge.heartLost) {
                     badge.heartLost = false
