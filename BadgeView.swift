@@ -27,7 +27,6 @@ struct BadgeView: View {
                         }
                
                     
-                     badge.currentBadgeStatus()
                     withAnimation(){
                         badge.sheetPresented = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
@@ -72,7 +71,7 @@ struct CurrentBadge: View{
         
        
         HStack(spacing: 2){
-            BadgeImage(size: .constant(40))
+            BadgeImage(badgeItem: .constant(badge.minimizedBadge()), size: .constant(40))
            
           // if badge.heartLost{
               //  Popup(livesLeftTemp: $livesLeftTemp)

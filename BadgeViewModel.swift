@@ -113,7 +113,7 @@ class BadgeViewModel: ObservableObject{
             }
             
         }
-        
+        print(currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0].statusCount)
         return currentBadgesStatusMB.filter({$0.badgeAchieved == false})[0] 
     }
     
