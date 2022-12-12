@@ -24,6 +24,7 @@ class BadgeViewModel: ObservableObject{
         var brokenHearts: Bool = false
         
         if !(badgeProgressLostPopupLastSeen > currentBadgesStatus[lockedBadgeIndex].progressLostInBackground){
+            
             currentBadgesStatus[lockedBadgeIndex].redDotOnBadgeDueToInactivity = true
             
             var filteredArray : [HabitArray] = []
@@ -34,13 +35,12 @@ class BadgeViewModel: ObservableObject{
             if !(filteredArray.filter({$0.status != 0 }).count > 0) {
                 
                 brokenHearts = true
-                //Popup
+                badgeProgressLostPopup = true
             }
         }
         
         return brokenHearts
     }
-    
     
     func currentBadgeStatus(){
         

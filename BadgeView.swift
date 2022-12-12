@@ -67,7 +67,9 @@ struct CurrentBadge: View{
                 TemporaryPopup()
                     .opacity(badge.heartLost ? 1 : 0)
                 
-                PermenantPopup()
+                if badge.progressLostInBackground(lockedBadgeIndex: badge.minimizedBadge().index){
+                    PermenantPopup()
+                }
             }
                 
         }
