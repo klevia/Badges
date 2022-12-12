@@ -210,6 +210,8 @@ struct BadgeTrayList: View{
    
     var body: some View{
         
+        var redDot: Bool = badge.progressLostInBackground(lockedBadgeIndex: badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index ?? 0).redDot
+        
         VStack(spacing: 16){
             
             
@@ -223,12 +225,12 @@ struct BadgeTrayList: View{
                         print("Active")
                         print(badge.currentBadgesStatus)
                          
-                    } else {
+                    } else if (badgeItem.index == badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index && (redDot == true)){
                         
                         
                     }
                 }){
-                    BadgeCell(badgeItem: .constant(badgeItem))
+                    BadgeCell(badgeItem: .constant(badgeItem), redDot: .constant(redDot))
                 }
                 .buttonStyle(ButtonOpacity(opacity: .constant(0.25)))
             .padding(.horizontal, 24)
@@ -244,6 +246,7 @@ struct BadgeCell: View{
     
     @EnvironmentObject var badge: BadgeViewModel
     @Binding var badgeItem: BadgeObject
+    @Binding var redDot: Bool
     var body: some View{
         
         
@@ -320,7 +323,7 @@ struct BadgeCell: View{
         .padding(.vertical, 16)
         .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
         .opacity(badgeItem.badgeAchieved || (badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index == badgeItem.index) ? 1 : 0.5)
-        .overlay(badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index == badgeItem.index ? CircleOverlay() : nil)
+        .overlay(badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index == badgeItem.index ? (redDot ? CircleOverlay() : nil) : nil)
         
         
     }
