@@ -23,7 +23,7 @@ struct LottieView: UIViewRepresentable {
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
         animationView.animationSpeed = 1
-      //  animationView.play()
+      
         
  
         view.addSubview(animationView)
@@ -31,15 +31,12 @@ struct LottieView: UIViewRepresentable {
         animationView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        animationView.heightAnchor.constraint(equalTo: view.heightAnchor),//.isActive = true
-        animationView.widthAnchor.constraint(equalTo: view.widthAnchor)//.isActive = true
+        animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
+        animationView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
         return view
     }
- 
-  //  func updateUIView(_ uiView: UIViewType, context: Context) {
- 
-  //  }
+
     
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
            if isPlay {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TemporaryPopup: View{
     
-    @State private var isPlay: Bool = true
+    @State private var isPlay: Bool = false
     @EnvironmentObject var badge: BadgeViewModel
     
     var body: some View{
