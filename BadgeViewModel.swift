@@ -15,7 +15,7 @@ class BadgeViewModel: ObservableObject{
     @Published var currentHabit: String = ""
     @Published var sheetPresented: Bool = false
     @Published var heartLost : Bool = false
-    @Published var badgeEarnedPopup: Bool = false
+    @Published var badgeEarnedPopup: (boolean: Bool, index: Int?) = (false, nil)
     @Published var badgeProgressLostPopup: Bool = false
     @AppStorage("badgeProgressLostPopupLastSeen") var badgeProgressLostPopupLastSeen : Date = Date.distantPast
     

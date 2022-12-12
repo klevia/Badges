@@ -28,7 +28,8 @@ struct DoneButton: View{
                    
                         badge.sheetPresented = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                            badge.badgeEarnedPopup = true
+                            badge.badgeEarnedPopup.boolean = true
+                            badge.badgeEarnedPopup.index = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == true})?.index
                         }
                      
                 }

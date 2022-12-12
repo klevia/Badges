@@ -41,7 +41,8 @@ struct BadgeView: View {
             
             if !badge.sheetPresented{
                 
-                badge.badgeEarnedPopup = false
+                badge.badgeEarnedPopup.boolean = false
+                badge.badgeEarnedPopup.index = nil
                 badge.dismissProgressLostPopUp()
                 badgeTutorialDone = true
                 
