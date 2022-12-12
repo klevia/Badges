@@ -19,13 +19,15 @@ class BadgeViewModel: ObservableObject{
     @Published var badgeProgressLostPopup: Bool = false
     @AppStorage("badgeProgressLostPopupLastSeen") var badgeProgressLostPopupLastSeen : Date = Date.distantPast
     
-    func progressLostInBackground(lockedBadgeIndex: Int) -> Bool{
+    func progressLostInBackground(lockedBadgeIndex: Int) -> (brokenHearts : Bool,redDot :Bool){
         
         var brokenHearts: Bool = false
+        var redDot: Bool = false
         
         if !(badgeProgressLostPopupLastSeen > currentBadgesStatus[lockedBadgeIndex].progressLostInBackground){
             
             currentBadgesStatus[lockedBadgeIndex].redDotOnBadgeDueToInactivity = true
+            redDot = true
             
             var filteredArray : [HabitArray] = []
             
@@ -39,7 +41,7 @@ class BadgeViewModel: ObservableObject{
             }
         }
         
-        return brokenHearts
+        return (brokenHearts,redDot)
     }
     
     func currentBadgeStatus(){

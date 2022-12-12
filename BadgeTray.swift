@@ -192,6 +192,10 @@ struct CurrentBadgeSubHeading: View{
             }
             .opacity(0.33)
             
+            if badge.progressLostInBackground(lockedBadgeIndex: badge.minimizedBadge().index).redDot{
+              //  RedDot()
+            }
+            
         }
         .foregroundColor(.white)
         .padding(.bottom, 48)
