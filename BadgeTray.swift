@@ -215,9 +215,10 @@ struct BadgeTrayList: View{
                 Button(action:{
                     
                     if badgeItem.badgeAchieved{
+                        
                         print("Active")
                         print(badge.currentBadgesStatus)
-                        triangleClicked.toggle()
+                         
                     } else {
                         
                         
@@ -225,7 +226,7 @@ struct BadgeTrayList: View{
                 }){
                     BadgeCell(badgeItem: .constant(badgeItem))
                 }
-                .buttonStyle(ButtonOpacity(opacity: badgeItem.badgeAchieved ? .constant(0.25) : .constant(1)))
+                .buttonStyle(ButtonOpacity(opacity: .constant(0.25)))
             .padding(.horizontal, 24)
             
             
@@ -314,7 +315,23 @@ struct BadgeCell: View{
         }
         .padding(.vertical, 16)
         .background(RoundedRectangle(cornerRadius: 24).foregroundColor(Color.white.opacity(0.1)))
-        .opacity(badgeItem.statusCount == 0 ? 0.5 : 1)
+        .opacity(badgeItem.badgeAchieved || (badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index == badgeItem.index) ? 1 : 0.5)
+        .overlay(badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index == badgeItem.index ? CircleOverlay() : nil)
+        
+        
+    }
+}
+
+struct CircleOverlay: View{
+    
+    var body: some View{
+        
+        Circle()
+            .frame(width: 14, height: 14)
+            .foregroundColor(.red)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(.top, 1).padding(.trailing, 1)
+            
         
     }
 }
