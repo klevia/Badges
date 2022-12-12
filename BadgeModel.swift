@@ -72,7 +72,8 @@ var habitEntries : [HabitArray] = [
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 07)),
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 08)),
     HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 09)),
-    HabitArray(status: 1, timeStamp: date(year: 2022, month: 12, day: 10))
+    HabitArray(status: 0, timeStamp: date(year: 2022, month: 12, day: 10)),
+    HabitArray(status: 0, timeStamp: date(year: 2022, month: 12, day: 11))
     
 ]
 

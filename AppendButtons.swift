@@ -136,8 +136,8 @@ struct InactivityButton: View{
                     }
                     
                 }
-           
-            print(badge.minimizedBadge().progressLostInBackground)
+            print("current badge is : \(badge.minimizedBadge().shape)")
+            print("The progress of this badge was lost on :  \(badge.minimizedBadge().progressLostInBackground)")
 
                 
             

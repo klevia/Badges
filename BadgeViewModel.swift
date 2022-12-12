@@ -16,31 +16,37 @@ class BadgeViewModel: ObservableObject{
     @Published var sheetPresented: Bool = false
     @Published var heartLost : Bool = false
     @Published var badgeEarnedPopup: Bool = false
-    @Published var badgeProgressLostPopup: Bool = false
+    @Published var badgeProgressLostPopup: Bool = true
     @AppStorage("badgeProgressLostPopupLastSeen") var badgeProgressLostPopupLastSeen : Date = Date.distantPast
     
     func progressLostInBackground(lockedBadgeIndex: Int) -> (brokenHearts : Bool,redDot :Bool){
         
+    var currentBadge = minimizedBadge()
+        
         var brokenHearts: Bool = false
         var redDot: Bool = false
+
         
-        if !(badgeProgressLostPopupLastSeen > currentBadgesStatus[lockedBadgeIndex].progressLostInBackground){
+        if !(badgeProgressLostPopupLastSeen > currentBadge.progressLostInBackground){
             
-            currentBadgesStatus[lockedBadgeIndex].redDotOnBadgeDueToInactivity = true
-            redDot = true
+
+               redDot = true
             
-            var filteredArray : [HabitArray] = []
+         var filteredArray : [HabitArray] = []
             
-            filteredArray =  statuses.filter({$0.timeStamp > currentBadgesStatus[lockedBadgeIndex].progressLostInBackground})
-            
+               filteredArray =  statuses.filter({$0.timeStamp > currentBadge.progressLostInBackground})
+          
+          
             //check if the habit was swiped after inactivity in background
             if !(filteredArray.filter({$0.status != 0 }).count > 0) {
                 
-                brokenHearts = true
-                badgeProgressLostPopup = true
+                   brokenHearts = true
+                 //badgeProgressLostPopup = true
+                 
+                print("Came here")
             }
         }
-        
+        print(brokenHearts,redDot)
         return (brokenHearts,redDot)
     }
     
