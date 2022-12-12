@@ -14,7 +14,7 @@ struct BadgeEarnedPopup: View {
     
     var body: some View {
         
-        let achievedBadge = badge.currentBadgesStatus.last(where: {$0.badgeAchieved == true})!
+        let achievedBadge = badge.currentBadgesStatus[badge.badgeEarnedPopup.index ?? 0]//badge.currentBadgesStatus.last(where: {$0.badgeAchieved == true})!
         let substring = String(achievedBadge.endRepetition.dropLast(2))
         
         VStack{
@@ -30,7 +30,10 @@ struct BadgeEarnedPopup: View {
                     Button(action: {
                         
                         withAnimation(){
-                            badge.badgeEarnedPopup = false
+                            badge.badgeEarnedPopup.boolean = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                                badge.badgeEarnedPopup.index = nil
+                            }
                         }
                         
                     }){

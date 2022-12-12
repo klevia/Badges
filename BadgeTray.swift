@@ -59,12 +59,15 @@ struct BadgeTray: View {
                     .padding(.trailing,16))
             .overlay(
                 
-                Color.black.opacity((badge.badgeEarnedPopup || badge.badgeProgressLostPopup) ? 0.5 : 0)
+                Color.black.opacity((badge.badgeEarnedPopup.boolean || badge.badgeProgressLostPopup) ? 0.5 : 0)
                     
                     .onTapGesture {
                         
                         withAnimation(){
-                            badge.badgeEarnedPopup = false
+                            badge.badgeEarnedPopup.boolean = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                                badge.badgeEarnedPopup.index = nil
+                            }
                             badge.dismissProgressLostPopUp()
                         }
                         
@@ -72,7 +75,7 @@ struct BadgeTray: View {
                 
             )
             
-            .overlay(badge.badgeEarnedPopup ? BadgeEarnedPopup() : nil)
+            .overlay(badge.badgeEarnedPopup.boolean ? BadgeEarnedPopup() : nil)
             .overlay(badge.badgeProgressLostPopup ? ProgressLostPopup() : nil)
             
             if !badgeTutorialDone{
@@ -222,11 +225,16 @@ struct BadgeTrayList: View{
                     
                     if badgeItem.badgeAchieved{
                         
-                        print("Active")
-                        print(badge.currentBadgesStatus)
+                        withAnimation(){
+                            badge.badgeEarnedPopup.boolean = true
+                            badge.badgeEarnedPopup.index = badgeItem.index
+                        }
                          
                     } else if (badgeItem.index == badge.currentBadgesStatus.first(where: {$0.badgeAchieved == false})?.index && (redDot == true)){
                         
+                        withAnimation(){
+                            badge.badgeProgressLostPopup = true
+                        }
                         
                     }
                 }){
